@@ -22,7 +22,6 @@ class MainApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Inspira',
-      initialRoute: '/login',
       routes: {
         '/': (context) => const SplashPage(),
         '/login': (context) => const LoginPage(),
