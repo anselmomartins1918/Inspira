@@ -1,9 +1,11 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:inspira/app/data/services/auth_service.dart';
 import 'package:inspira/app/ui/pages/login_page.dart';
 import 'package:inspira/app/ui/pages/splash_page.dart';
 import 'package:inspira/firebase_options.dart';
+import 'package:provider/provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -19,13 +21,18 @@ class MainApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      debugShowCheckedModeBanner: false,
-      title: 'Inspira',
-      routes: {
-        '/': (context) => const SplashPage(),
-        '/login': (context) => const LoginPage(),
-      },
+    return MultiProvider(
+      providers: [
+        ChangeNotifierProvider(create: (context) => AuthService()),
+      ],
+      child: MaterialApp(
+        debugShowCheckedModeBanner: false,
+        title: 'Inspira',
+        routes: {
+          '/': (context) => const SplashPage(),
+          '/login': (context) => const LoginPage(),
+        },
+      ),
     );
   }
 }
