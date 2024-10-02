@@ -2,6 +2,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inspira/app/data/services/auth_service.dart';
+import 'package:inspira/app/ui/pages/home_page.dart';
 import 'package:inspira/app/ui/pages/login_page.dart';
 import 'package:inspira/app/ui/pages/splash_page.dart';
 import 'package:inspira/firebase_options.dart';
@@ -30,6 +31,7 @@ class MainApp extends StatelessWidget {
         title: 'Inspira',
         routes: {
           '/': (context) => const SplashPage(),
+          '/home': (context) => const HomePage(),
           '/login': (context) => const LoginPage(),
         },
       ),

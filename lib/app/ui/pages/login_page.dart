@@ -52,9 +52,10 @@ class _LoginPageState extends State<LoginPage> {
                         auth: context.read<AuthService>(),
                       );
 
-                      if (loggedIn) {
-                      } else {
-                        if (context.mounted) {
+                      if (context.mounted) {
+                        if (loggedIn) {
+                          Navigator.pushReplacementNamed(context, '/home');
+                        } else {
                           ScaffoldMessenger.of(context).showSnackBar(
                             const SnackBar(
                               content: Text(

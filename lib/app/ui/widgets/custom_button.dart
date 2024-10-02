@@ -19,10 +19,10 @@ class CustomButton extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 48.0,
+      height: 64.0,
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: backgroundColor ?? Colors.blue,
+          backgroundColor: backgroundColor ?? const Color(0xFFD35614),
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(10.0),
           ),
@@ -52,7 +52,7 @@ class CustomButton extends StatelessWidget {
                     ),
                     child: Text(
                       text,
-                      style: const TextStyle(color: Colors.white),
+                      style: const TextStyle(color: Colors.white, fontSize: 24.0),
                     ),
                   ),
           ],
