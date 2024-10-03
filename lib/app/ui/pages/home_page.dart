@@ -25,17 +25,17 @@ class HomePage extends StatelessWidget {
                     SizedBox(
                       width: size.width * 0.4,
                       height: size.width * 0.4,
-                      child:
-                          SvgPicture.asset('assets/logo_unifametro.svg'),
+                      child: SvgPicture.asset('assets/logo_unifametro.svg'),
                     ),
                     const SizedBox(height: 24.0),
                     SizedBox(
-                      width: size.width * 0.7,
+                      width: size.width * 0.6,
                       child: const Text(
                         'O ranking das equipes aparecerá aqui quando as avaliacões forem lançadas :)',
                         textAlign: TextAlign.center,
                         style: TextStyle(
                           color: Colors.black,
+                          fontFamily: 'Lato',
                           fontSize: 20.0,
                         ),
                       ),
@@ -61,7 +61,11 @@ class HomePage extends StatelessWidget {
                   children: [
                     const Text(
                       'Bem-vindo, Anselmo',
-                      style: TextStyle(color: Colors.white, fontSize: 32.0),
+                      style: TextStyle(
+                        color: Colors.white,
+                        fontSize: 32.0,
+                        fontFamily: 'Lato',
+                      ),
                     ),
                     SizedBox(
                       width: size.width * 0.6,

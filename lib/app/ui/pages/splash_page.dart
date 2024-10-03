@@ -31,9 +31,17 @@ class SplashPage extends StatelessWidget {
               height: size.width * 0.5,
               child: SvgPicture.asset('assets/logo_unifametro_branco.svg'),
             ),
-            const Text(
-              'Produzido por Hub de Inovação Unifametro',
-              style: TextStyle(color: Colors.white, fontSize: 20.0),
+            RichText(
+              text: const TextSpan(
+                text: 'Produzido por ',
+                style: TextStyle(color: Colors.white, fontSize: 20.0),
+                children: [
+                  TextSpan(
+                    text: 'Hub de Inovação Unifametro',
+                    style: TextStyle(color: Color(0xFFF9A053), fontSize: 20.0),
+                  ),
+                ],
+              ),
             ),
           ],
         ),

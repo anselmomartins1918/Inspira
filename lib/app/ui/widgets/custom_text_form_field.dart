@@ -50,8 +50,17 @@ class CustomTextFormField extends StatelessWidget {
           fontWeight: FontWeight.w500,
         ),
         labelText: labelText,
+        labelStyle: const TextStyle(
+          color: Colors.black,
+          fontFamily: 'Lato',
+          fontSize: 16.0,
+        ),
       ),
-      style: const TextStyle(fontSize: 16.0, color: Colors.black),
+      style: const TextStyle(
+        color: Colors.black,
+        fontFamily: 'Lato',
+        fontSize: 16.0,
+      ),
       cursorColor: Colors.black,
       onChanged: onChanged,
     );

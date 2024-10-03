@@ -26,3 +26,8 @@ flutter:
     - assets/logo_unifametro.svg
     - assets/logo_unifametro_branco.svg
     - assets/inspira.png
+
+  fonts: 
+    - family: Lato
+      fonts:
+        - asset: assets/fonts/Lato-Regular.ttf

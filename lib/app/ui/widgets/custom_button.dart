@@ -44,7 +44,9 @@ class CustomButton extends StatelessWidget {
                 : Container(),
             (isLoading == true)
                 ? const Center(
-                    child: CircularProgressIndicator(color: Colors.white,),
+                    child: CircularProgressIndicator(
+                      color: Colors.white,
+                    ),
                   )
                 : Container(
                     margin: EdgeInsets.only(
@@ -52,7 +54,11 @@ class CustomButton extends StatelessWidget {
                     ),
                     child: Text(
                       text,
-                      style: const TextStyle(color: Colors.white, fontSize: 24.0),
+                      style: const TextStyle(
+                        color: Colors.white,
+                        fontSize: 24.0,
+                        fontFamily: 'Lato',
+                      ),
                     ),
                   ),
           ],
