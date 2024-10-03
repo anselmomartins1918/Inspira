@@ -30,9 +30,8 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Inspira',
-        initialRoute: '/team_selection',
         routes: {
-          '/': (context) => const TeamSelection(),
+          '/': (context) => const SplashPage(),
           '/home': (context) => const HomePage(),
           '/login': (context) => const LoginPage(),
           '/team_selection': (context) => const TeamSelection(),

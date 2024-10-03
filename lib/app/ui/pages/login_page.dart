@@ -22,52 +22,87 @@ class _LoginPageState extends State<LoginPage> {
     LoginController loginController = LoginController();
 
     return Scaffold(
-      backgroundColor: Colors.white,
-      body: Container(
-        margin: EdgeInsets.symmetric(horizontal: size.width * 0.15),
+      backgroundColor: const Color(0xFF05713A),
+      body: SizedBox(
+        height: size.height,
+        width: size.width,
         child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            CustomTextFormField(
-              controller: email,
-              labelText: 'Usuário',
+            Expanded(
+              flex: 45,
+              child: SizedBox(
+                width: size.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    SizedBox(
+                      height: size.width * 0.125,
+                      child: Image.asset('assets/inspira.png'),
+                    ),
+                  ],
+                ),
+              ),
             ),
-            const SizedBox(height: 8.0),
-            CustomTextFormField(
-              controller: password,
-              labelText: 'Senha',
-              obscureText: true,
-            ),
-            const SizedBox(height: 32.0),
-            AnimatedBuilder(
-                animation: loginController.isLoading$,
-                builder: (context, child) {
-                  return CustomButton(
-                    text: 'Entrar',
-                    isLoading: loginController.isLoading,
-                    onPressed: () async {
-                      bool loggedIn = await loginController.login(
-                        email: email.text,
-                        password: password.text,
-                        auth: context.read<AuthService>(),
-                      );
+            Expanded(
+              flex: 55,
+              child: Container(
+                decoration: const BoxDecoration(
+                  borderRadius: BorderRadius.only(
+                    topLeft: Radius.circular(120.0),
+                    topRight: Radius.circular(120.0),
+                  ),
+                  color: Colors.white,
+                ),
+                width: size.width,
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    CustomTextFormField(
+                      controller: email,
+                      labelText: 'Usuário',
+                    ),
+                    const SizedBox(height: 8.0),
+                    CustomTextFormField(
+                      controller: password,
+                      labelText: 'Senha',
+                      obscureText: true,
+                    ),
+                    const SizedBox(height: 32.0),
+                    AnimatedBuilder(
+                      animation: loginController.isLoading$,
+                      builder: (context, child) {
+                        return CustomButton(
+                          text: 'Entrar',
+                          isLoading: loginController.isLoading,
+                          onPressed: () async {
+                            bool loggedIn = await loginController.login(
+                              email: email.text,
+                              password: password.text,
+                              auth: context.read<AuthService>(),
+                            );
 
-                      if (context.mounted) {
-                        if (loggedIn) {
-                          Navigator.pushReplacementNamed(context, '/home');
-                        } else {
-                          ScaffoldMessenger.of(context).showSnackBar(
-                            const SnackBar(
-                              content: Text(
-                                'Por favor, verifique suas credenciais de acesso.',
-                              ),
-                            ),
-                          );
-                        }
-                      }
-                    },
-                  );
-                })
+                            if (context.mounted) {
+                              if (loggedIn) {
+                                Navigator.pushReplacementNamed(
+                                    context, '/home');
+                              } else {
+                                ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(
+                                    content: Text(
+                                      'Por favor, verifique suas credenciais de acesso.',
+                                    ),
+                                  ),
+                                );
+                              }
+                            }
+                          },
+                        );
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ),
           ],
         ),
       ),
