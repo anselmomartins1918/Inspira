@@ -50,8 +50,8 @@ class HomePage extends StatelessWidget {
                 width: size.width,
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(120.0),
-                    topRight: Radius.circular(120.0),
+                    topLeft: Radius.circular(64.0),
+                    topRight: Radius.circular(64.0),
                   ),
                   color: Color(0xFF05713A),
                 ),
@@ -60,7 +60,7 @@ class HomePage extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
                     const Text(
-                      'Bem-vindo, Anselmo',
+                      'Olá, Anselmo',
                       style: TextStyle(
                         color: Colors.white,
                         fontSize: 32.0,

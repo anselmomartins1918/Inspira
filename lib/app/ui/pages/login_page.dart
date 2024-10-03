@@ -36,7 +36,7 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: size.width * 0.125,
+                      height: size.width * 0.2,
                       child: Image.asset('assets/inspira.png'),
                     ),
                   ],
@@ -48,58 +48,108 @@ class _LoginPageState extends State<LoginPage> {
               child: Container(
                 decoration: const BoxDecoration(
                   borderRadius: BorderRadius.only(
-                    topLeft: Radius.circular(120.0),
-                    topRight: Radius.circular(120.0),
+                    topLeft: Radius.circular(64.0),
+                    topRight: Radius.circular(64.0),
                   ),
                   color: Colors.white,
                 ),
                 width: size.width,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CustomTextFormField(
-                      controller: email,
-                      labelText: 'Usuário',
-                    ),
-                    const SizedBox(height: 8.0),
-                    CustomTextFormField(
-                      controller: password,
-                      labelText: 'Senha',
-                      obscureText: true,
-                    ),
-                    const SizedBox(height: 32.0),
-                    AnimatedBuilder(
-                      animation: loginController.isLoading$,
-                      builder: (context, child) {
-                        return CustomButton(
-                          text: 'Entrar',
-                          isLoading: loginController.isLoading,
-                          onPressed: () async {
-                            bool loggedIn = await loginController.login(
-                              email: email.text,
-                              password: password.text,
-                              auth: context.read<AuthService>(),
-                            );
-
-                            if (context.mounted) {
-                              if (loggedIn) {
-                                Navigator.pushReplacementNamed(
-                                    context, '/home');
-                              } else {
-                                ScaffoldMessenger.of(context).showSnackBar(
-                                  const SnackBar(
-                                    content: Text(
-                                      'Por favor, verifique suas credenciais de acesso.',
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 64.0,
+                    vertical: 32.0,
+                  ),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Text(
+                        'Bem-vindo, Avaliador!',
+                        style: TextStyle(
+                          color: Color(0xFF032826),
+                          fontSize: 32.0,
+                          fontFamily: 'Lato',
+                        ),
+                      ),
+                      IntrinsicHeight(
+                        child: Column(
+                          children: [
+                            IntrinsicHeight(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'E-mail',
+                                    style: TextStyle(
+                                      color: Color(0xFF032826),
+                                      fontSize: 24.0,
+                                      fontFamily: 'Lato',
                                     ),
                                   ),
-                                );
+                                  const SizedBox(height: 4.0),
+                                  CustomTextFormField(
+                                    controller: email,
+                                    hintText: 'nome.sobrenome@inspira.com',
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const SizedBox(height: 16.0),
+                            IntrinsicHeight(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const Text(
+                                    'Senha',
+                                    style: TextStyle(
+                                      color: Color(0xFF032826),
+                                      fontSize: 24.0,
+                                      fontFamily: 'Lato',
+                                    ),
+                                  ),
+                                  const SizedBox(height: 4.0),
+                                  CustomTextFormField(
+                                    controller: password,
+                                    hintText: 'inspira2024',
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      AnimatedBuilder(
+                        animation: loginController.isLoading$,
+                        builder: (context, child) {
+                          return CustomButton(
+                            text: 'Entrar na conta',
+                            isLoading: loginController.isLoading,
+                            onPressed: () async {
+                              bool loggedIn = await loginController.login(
+                                email: email.text,
+                                password: password.text,
+                                auth: context.read<AuthService>(),
+                              );
+
+                              if (context.mounted) {
+                                if (loggedIn) {
+                                  Navigator.pushReplacementNamed(
+                                      context, '/home');
+                                } else {
+                                  ScaffoldMessenger.of(context).showSnackBar(
+                                    const SnackBar(
+                                      content: Text(
+                                        'Por favor, verifique suas credenciais de acesso.',
+                                      ),
+                                    ),
+                                  );
+                                }
                               }
-                            }
-                          },
-                        );
-                      },
-                    ),
-                  ],
+                            },
+                          );
+                        },
+                      ),
+                    ],
+                  ),
                 ),
               ),
             ),

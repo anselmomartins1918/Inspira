@@ -22,9 +22,9 @@ class CustomButton extends StatelessWidget {
       height: 64.0,
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: backgroundColor ?? const Color(0xFFD35614),
+          backgroundColor: backgroundColor ?? const Color(0xFFF6741C),
           shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(10.0),
+            borderRadius: BorderRadius.circular(16.0),
           ),
         ),
         onPressed: onPressed,
@@ -56,7 +56,7 @@ class CustomButton extends StatelessWidget {
                       text,
                       style: const TextStyle(
                         color: Colors.white,
-                        fontSize: 24.0,
+                        fontSize: 20.0,
                         fontFamily: 'Lato',
                       ),
                     ),

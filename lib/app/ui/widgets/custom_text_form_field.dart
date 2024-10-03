@@ -26,26 +26,17 @@ class CustomTextFormField extends StatelessWidget {
       controller: controller,
       obscureText: obscureText ?? false,
       readOnly: readOnly ?? false,
-      decoration: InputDecoration(
+      decoration: InputDecoration( 
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
-          borderSide: const BorderSide(
-            color: Colors.blue,
-            width: 2.0,
-          ),
+          borderSide: BorderSide.none,
+          borderRadius: BorderRadius.circular(16.0),
         ),
-        focusedBorder: OutlineInputBorder(
-          borderRadius: BorderRadius.circular(30.0),
-          borderSide: const BorderSide(
-            color: Colors.blue,
-            width: 2.0,
-          ),
-        ),
-        contentPadding: const EdgeInsets.symmetric(horizontal: 20.0),
-        fillColor: Colors.white,
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16.0),
+        fillColor: const Color(0xFFD7E0DB),
         filled: true,
         hintText: hintText,
         hintStyle: const TextStyle(
+          color: Color(0xFFB0B8B3),
           fontSize: 16.0,
           fontWeight: FontWeight.w500,
         ),
