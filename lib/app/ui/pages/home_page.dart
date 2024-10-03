@@ -70,7 +70,8 @@ class HomePage extends StatelessWidget {
                     SizedBox(
                       width: size.width * 0.6,
                       child: CustomButton(
-                        onPressed: () {},
+                        onPressed: () =>
+                            Navigator.pushNamed(context, '/team_selection'),
                         text: 'Avaliar equipe',
                       ),
                     ),

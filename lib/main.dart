@@ -5,6 +5,7 @@ import 'package:inspira/app/data/services/auth_service.dart';
 import 'package:inspira/app/ui/pages/home_page.dart';
 import 'package:inspira/app/ui/pages/login_page.dart';
 import 'package:inspira/app/ui/pages/splash_page.dart';
+import 'package:inspira/app/ui/pages/team_selection.dart';
 import 'package:inspira/firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -29,10 +30,12 @@ class MainApp extends StatelessWidget {
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
         title: 'Inspira',
+        initialRoute: '/team_selection',
         routes: {
-          '/': (context) => const SplashPage(),
+          '/': (context) => const TeamSelection(),
           '/home': (context) => const HomePage(),
           '/login': (context) => const LoginPage(),
+          '/team_selection': (context) => const TeamSelection(),
         },
       ),
     );
