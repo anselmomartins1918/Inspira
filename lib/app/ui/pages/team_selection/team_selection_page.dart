@@ -1,7 +1,12 @@
 import 'package:flutter/material.dart';
 
 class TeamSelection extends StatelessWidget {
-  const TeamSelection({super.key});
+  final String name;
+
+  const TeamSelection({
+    required this.name,
+    super.key,
+  });
 
   static const List<String> teams = [
     'Equipe 1',
@@ -43,21 +48,28 @@ class TeamSelection extends StatelessWidget {
                 ),
                 itemCount: teams.length,
                 itemBuilder: (context, index) {
-                  return Card(
-                    color: const Color(0xFFD7E0DB),
-                    child: Stack(
-                      children: [
-                        Center(
-                          child: Text(
-                            teams[index],
-                            style: const TextStyle(
-                              color: Colors.black,
-                              fontFamily: 'Lato',
-                              fontSize: 20.0,
+                  return GestureDetector(
+                    onTap: () => Navigator.pushNamed(
+                      context,
+                      '/avaluation',
+                      arguments: [name, teams[index]],
+                    ),
+                    child: Card(
+                      color: const Color(0xFFD7E0DB),
+                      child: Stack(
+                        children: [
+                          Center(
+                            child: Text(
+                              teams[index],
+                              style: const TextStyle(
+                                color: Colors.black,
+                                fontFamily: 'Lato',
+                                fontSize: 20.0,
+                              ),
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
                   );
                 },

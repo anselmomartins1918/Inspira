@@ -2,15 +2,23 @@ import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
   final void Function()? onPressed;
+  final Color? borderColor;
   final String text;
+  final Color? textColor;
   final IconData? prefixIcon;
+  final IconData? suffixIcon;
+  final Color? iconColor;
   final bool? isLoading;
   final Color? backgroundColor;
 
   const CustomButton({
     required this.onPressed,
     required this.text,
+    this.borderColor,
+    this.textColor,
     this.prefixIcon,
+    this.suffixIcon,
+    this.iconColor,
     this.isLoading,
     this.backgroundColor,
     super.key,
@@ -24,6 +32,9 @@ class CustomButton extends StatelessWidget {
         style: TextButton.styleFrom(
           backgroundColor: backgroundColor ?? const Color(0xFFF6741C),
           shape: RoundedRectangleBorder(
+            side: borderColor != null
+                ? BorderSide(width: 1.0, color: borderColor!)
+                : BorderSide.none,
             borderRadius: BorderRadius.circular(16.0),
           ),
         ),
@@ -38,7 +49,7 @@ class CustomButton extends StatelessWidget {
                     ),
                     child: Icon(
                       prefixIcon,
-                      color: Colors.white,
+                      color: iconColor ?? Colors.white,
                     ),
                   )
                 : Container(),
@@ -54,13 +65,19 @@ class CustomButton extends StatelessWidget {
                     ),
                     child: Text(
                       text,
-                      style: const TextStyle(
-                        color: Colors.white,
+                      style: TextStyle(
+                        color: textColor ?? Colors.white,
                         fontSize: 20.0,
                         fontFamily: 'Lato',
                       ),
                     ),
                   ),
+            if (suffixIcon != null)
+              Icon(
+                suffixIcon,
+                size: 24.0,
+                color: iconColor ?? Colors.white,
+              ),
           ],
         ),
       ),
