@@ -13,7 +13,7 @@ class AvaluationPage extends StatelessWidget {
   });
 
   static const Map<String, String> themes = {
-    'Equipe 1': 'Mescados de Educação Brasileira',
+    'Equipe 1': 'Mercados de Educação Brasileira',
     'Equipe 2': 'Concorrência no Setor Educacional',
     'Equipe 3': 'Tecnologia e Inovação na Educação',
     'Equipe 4': 'Criação de Produtos Inovadores para a Unifametro',
