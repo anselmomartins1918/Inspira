@@ -32,19 +32,6 @@ class HomePage extends StatelessWidget {
                       height: size.width * 0.4,
                       child: SvgPicture.asset('assets/logo_unifametro.svg'),
                     ),
-                    const SizedBox(height: 24.0),
-                    SizedBox(
-                      width: size.width * 0.6,
-                      child: const Text(
-                        'O ranking das equipes aparecerá aqui quando as avaliacões forem lançadas :)',
-                        textAlign: TextAlign.center,
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontFamily: 'Lato',
-                          fontSize: 20.0,
-                        ),
-                      ),
-                    ),
                   ],
                 ),
               ),
