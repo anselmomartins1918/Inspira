@@ -24,31 +24,13 @@ class TeamSelection extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
-            Stack(
-              children: [
-                IconButton(
-                  color: const Color(0xFFF6741C),
-                  icon: const Icon(Icons.arrow_back_ios_new),
-                  iconSize: 32.0,
-                  onPressed: () => Navigator.pop(context),
-                ),
-                const SizedBox(
-                  height: 48.0,
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Text(
-                        'Seleção de Equipe',
-                        style: TextStyle(
-                          color: Color(0xFF0A6844),
-                          fontFamily: 'Lato',
-                          fontSize: 24.0,
-                        ),
-                      ),
-                    ],
-                  ),
-                ),
-              ],
+            const Text(
+              'Seleção de Equipe',
+              style: TextStyle(
+                color: Color(0xFF0A6844),
+                fontFamily: 'Lato',
+                fontSize: 24.0,
+              ),
             ),
             const SizedBox(height: 20.0),
             Expanded(
