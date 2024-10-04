@@ -30,9 +30,9 @@ class AvaluationPage extends StatelessWidget {
 
   static const List<String> types = [
     'Grau de aderência da solução ao desafio de captação e permanência de alunos',
-    'Grau de aderência da solução ao desafio de captação e permanência de alunos',
-    'Grau de aderência da solução ao desafio de captação e permanência de alunos',
-    'Grau de aderência da solução ao desafio de captação e permanência de alunos',
+    'Potencial de implementação real com base no custo benefício',
+    'Grau de Inovação da Solução comparado ao Estado do Ceará',
+    'Grau de Simplicidade da solução: promove uma experiência mais eficiente e acessível tanto para os usuários experientes como para novatos',
   ];
 
   @override
@@ -150,12 +150,12 @@ class AvaluationPage extends StatelessWidget {
                               ),
                               const SizedBox(height: 16.0),
                               Text(
-                                types.first,
+                                types[controller.actualValue],
                                 textAlign: TextAlign.center,
                                 style: const TextStyle(
                                   color: Color(0xFF05713A),
                                   fontFamily: 'Lalo',
-                                  fontSize: 24.0,
+                                  fontSize: 22.0,
                                   fontWeight: FontWeight.bold,
                                 ),
                               ),
@@ -252,7 +252,7 @@ class AvaluationPage extends StatelessWidget {
                               },
                             ),
                             CustomButton(
-                              text: 'Próximo Critério',
+                              text: controller.actualValue != 3 ? 'Próximo Critério' : 'Revisar avaliação',
                               suffixIcon: Icons.arrow_forward_ios,
                               onPressed: () => controller.increment(),
                             ),

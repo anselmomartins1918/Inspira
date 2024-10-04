@@ -73,10 +73,15 @@ class CustomButton extends StatelessWidget {
                     ),
                   ),
             if (suffixIcon != null)
-              Icon(
-                suffixIcon,
-                size: 24.0,
-                color: iconColor ?? Colors.white,
+              Container(
+                margin: EdgeInsets.only(
+                  left: (suffixIcon != null) ? 12 : 0,
+                ),
+                child: Icon(
+                  suffixIcon,
+                  size: 24.0,
+                  color: iconColor ?? Colors.white,
+                ),
               ),
           ],
         ),
