@@ -68,7 +68,7 @@ class HomePage extends StatelessWidget {
                         SizedBox(
                           width: size.width * 0.6,
                           child: CustomButton(
-                            onPressed: () => Navigator.pushNamed(
+                            onPressed: () => Navigator.popAndPushNamed(
                               context,
                               '/team_selection',
                               arguments: homeController.name,

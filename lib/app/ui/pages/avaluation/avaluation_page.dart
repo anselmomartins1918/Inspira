@@ -429,7 +429,30 @@ class AvaluationPage extends StatelessWidget {
                           text:
                               'Confirmar Avaliação com ${controller.grades[0] * 3 + controller.grades[1] * 3 + controller.grades[2] * 2 + controller.grades[3] * 1} pts',
                           suffixIcon: Icons.arrow_forward_ios,
-                          onPressed: controller.verifyComplete() ? () {} : null,
+                          onPressed: controller.verifyComplete()
+                              ? () async {
+                                  bool confirmed = await controller
+                                      .sendAvaluation(team: team, valuer: name);
+
+                                  if (context.mounted) {
+                                    if (confirmed) {
+                                      Navigator.pushNamed(
+                                        context,
+                                        '/confirmation',
+                                      );
+                                    } else {
+                                      ScaffoldMessenger.of(context)
+                                          .showSnackBar(
+                                        const SnackBar(
+                                          content: Text(
+                                            'Não foi possível concluir a avaliação. Por favor, entre em contato com o suporte!',
+                                          ),
+                                        ),
+                                      );
+                                    }
+                                  }
+                                }
+                              : null,
                         ),
                       ],
                     ),

@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inspira/app/data/services/auth_service.dart';
 import 'package:inspira/app/ui/pages/avaluation/avaluation_page.dart';
+import 'package:inspira/app/ui/pages/confirmation/confirmarion_page.dart';
 import 'package:inspira/app/ui/pages/home/home_page.dart';
 import 'package:inspira/app/ui/pages/login/login_page.dart';
 import 'package:inspira/app/ui/pages/splash/splash_page.dart';
@@ -37,6 +38,7 @@ class MainApp extends StatelessWidget {
             final args = ModalRoute.of(context)?.settings.arguments as List;
             return AvaluationPage(name: args[0], team: args[1]);
           },
+          '/confirmation': (context) => const ConfirmationPage(),
           '/home': (context) => const HomePage(),
           '/login': (context) => const LoginPage(),
           '/team_selection': (context) {
