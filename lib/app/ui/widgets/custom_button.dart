@@ -30,7 +30,9 @@ class CustomButton extends StatelessWidget {
       height: 64.0,
       child: TextButton(
         style: TextButton.styleFrom(
-          backgroundColor: backgroundColor ?? const Color(0xFFF6741C),
+          backgroundColor: onPressed != null
+              ? (backgroundColor ?? const Color(0xFFF6741C))
+              : Colors.grey,
           shape: RoundedRectangleBorder(
             side: borderColor != null
                 ? BorderSide(width: 1.0, color: borderColor!)

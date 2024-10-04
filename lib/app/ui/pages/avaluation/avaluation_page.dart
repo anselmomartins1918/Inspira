@@ -160,74 +160,100 @@ class AvaluationPage extends StatelessWidget {
                                 ),
                               ),
                               const SizedBox(height: 32.0),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceAround,
-                                children: [
-                                  GestureDetector(
-                                    child: Stack(
-                                      children: [
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              color: Color(0xFFD7E0DB),
-                                              shape: BoxShape.circle),
-                                          padding: const EdgeInsets.all(32.0),
-                                          child: const Text(
-                                            '1',
-                                            style: TextStyle(
-                                              color: Color(0xFF141414),
-                                              fontFamily: 'Lalo',
-                                              fontSize: 24.0,
-                                              fontWeight: FontWeight.bold,
+                              AnimatedBuilder(
+                                animation: controller.grades$,
+                                builder: (context, child) {
+                                  return Row(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceAround,
+                                    children: [
+                                      GestureDetector(
+                                        onTap: () =>
+                                            controller.setValue(value: 1),
+                                        child: Stack(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: controller
+                                                          .verifyMarked(
+                                                              value: 1)
+                                                      ? Colors.green
+                                                      : const Color(0xFFD7E0DB),
+                                                  shape: BoxShape.circle),
+                                              padding:
+                                                  const EdgeInsets.all(32.0),
+                                              child: const Text(
+                                                '1',
+                                                style: TextStyle(
+                                                  color: Color(0xFF141414),
+                                                  fontFamily: 'Lalo',
+                                                  fontSize: 24.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    child: Stack(
-                                      children: [
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              color: Color(0xFFD7E0DB),
-                                              shape: BoxShape.circle),
-                                          padding: const EdgeInsets.all(32.0),
-                                          child: const Text(
-                                            '2',
-                                            style: TextStyle(
-                                              color: Color(0xFF141414),
-                                              fontFamily: 'Lalo',
-                                              fontSize: 24.0,
-                                              fontWeight: FontWeight.bold,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () =>
+                                            controller.setValue(value: 2),
+                                        child: Stack(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: controller
+                                                          .verifyMarked(
+                                                              value: 2)
+                                                      ? Colors.green
+                                                      : const Color(0xFFD7E0DB),
+                                                  shape: BoxShape.circle),
+                                              padding:
+                                                  const EdgeInsets.all(32.0),
+                                              child: const Text(
+                                                '2',
+                                                style: TextStyle(
+                                                  color: Color(0xFF141414),
+                                                  fontFamily: 'Lalo',
+                                                  fontSize: 24.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                  GestureDetector(
-                                    child: Stack(
-                                      children: [
-                                        Container(
-                                          decoration: const BoxDecoration(
-                                              color: Color(0xFFD7E0DB),
-                                              shape: BoxShape.circle),
-                                          padding: const EdgeInsets.all(32.0),
-                                          child: const Text(
-                                            '3',
-                                            style: TextStyle(
-                                              color: Color(0xFF141414),
-                                              fontFamily: 'Lalo',
-                                              fontSize: 24.0,
-                                              fontWeight: FontWeight.bold,
+                                      ),
+                                      GestureDetector(
+                                        onTap: () =>
+                                            controller.setValue(value: 3),
+                                        child: Stack(
+                                          children: [
+                                            Container(
+                                              decoration: BoxDecoration(
+                                                  color: controller
+                                                          .verifyMarked(
+                                                              value: 3)
+                                                      ? Colors.green
+                                                      : const Color(0xFFD7E0DB),
+                                                  shape: BoxShape.circle),
+                                              padding:
+                                                  const EdgeInsets.all(32.0),
+                                              child: const Text(
+                                                '3',
+                                                style: TextStyle(
+                                                  color: Color(0xFF141414),
+                                                  fontFamily: 'Lalo',
+                                                  fontSize: 24.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
                                             ),
-                                          ),
+                                          ],
                                         ),
-                                      ],
-                                    ),
-                                  ),
-                                ],
+                                      ),
+                                    ],
+                                  );
+                                },
                               ),
                             ],
                           ),
@@ -252,7 +278,9 @@ class AvaluationPage extends StatelessWidget {
                               },
                             ),
                             CustomButton(
-                              text: controller.actualValue != 3 ? 'Próximo Critério' : 'Revisar avaliação',
+                              text: controller.actualValue != 3
+                                  ? 'Próximo Critério'
+                                  : 'Revisar avaliação',
                               suffixIcon: Icons.arrow_forward_ios,
                               onPressed: () => controller.increment(),
                             ),
@@ -284,10 +312,10 @@ class AvaluationPage extends StatelessWidget {
                                       color: Color(0xFFD9D9D9),
                                       shape: BoxShape.circle),
                                   padding: const EdgeInsets.all(32.0),
-                                  child: const Text(
-                                    '3\npts',
+                                  child: Text(
+                                    '${controller.grades[0] * 3}\npts',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xFF141414),
                                       fontFamily: 'Lalo',
                                       fontSize: 24.0,
@@ -314,10 +342,10 @@ class AvaluationPage extends StatelessWidget {
                                       color: Color(0xFFD9D9D9),
                                       shape: BoxShape.circle),
                                   padding: const EdgeInsets.all(32.0),
-                                  child: const Text(
-                                    '3\npts',
+                                  child: Text(
+                                    '${controller.grades[1] * 3}\npts',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xFF141414),
                                       fontFamily: 'Lalo',
                                       fontSize: 24.0,
@@ -349,10 +377,10 @@ class AvaluationPage extends StatelessWidget {
                                       color: Color(0xFFD9D9D9),
                                       shape: BoxShape.circle),
                                   padding: const EdgeInsets.all(32.0),
-                                  child: const Text(
-                                    '3\npts',
+                                  child: Text(
+                                    '${controller.grades[2] * 2}\npts',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xFF141414),
                                       fontFamily: 'Lalo',
                                       fontSize: 24.0,
@@ -379,10 +407,10 @@ class AvaluationPage extends StatelessWidget {
                                       color: Color(0xFFD9D9D9),
                                       shape: BoxShape.circle),
                                   padding: const EdgeInsets.all(32.0),
-                                  child: const Text(
-                                    '3\npts',
+                                  child: Text(
+                                    '${controller.grades[3] * 1}\npts',
                                     textAlign: TextAlign.center,
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       color: Color(0xFF141414),
                                       fontFamily: 'Lalo',
                                       fontSize: 24.0,
@@ -398,9 +426,10 @@ class AvaluationPage extends StatelessWidget {
                           height: 24.0,
                         ),
                         CustomButton(
-                          text: 'Confirmar Avaliação com 23pts',
+                          text:
+                              'Confirmar Avaliação com ${controller.grades[0] * 3 + controller.grades[1] * 3 + controller.grades[2] * 2 + controller.grades[3] * 1} pts',
                           suffixIcon: Icons.arrow_forward_ios,
-                          onPressed: () => controller.increment(),
+                          onPressed: controller.verifyComplete() ? () {} : null,
                         ),
                       ],
                     ),
