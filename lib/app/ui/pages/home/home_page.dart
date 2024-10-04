@@ -14,6 +14,12 @@ class HomePage extends StatelessWidget {
         HomeController(auth: context.read<AuthService>());
     Size size = MediaQuery.of(context).size;
 
+    String? email = context.read<AuthService>().user?.email;
+
+    bool isValuer() {
+      return email != 'laura.coelho@inspira.com';
+    }
+
     return Scaffold(
       body: SizedBox(
         height: size.height,
@@ -68,12 +74,20 @@ class HomePage extends StatelessWidget {
                         SizedBox(
                           width: size.width * 0.6,
                           child: CustomButton(
-                            onPressed: () => Navigator.popAndPushNamed(
-                              context,
-                              '/team_selection',
-                              arguments: homeController.name,
-                            ),
-                            text: 'Avaliar equipe',
+                            onPressed: () {
+                              if (isValuer()) {
+                                Navigator.popAndPushNamed(
+                                  context,
+                                  '/team_selection',
+                                  arguments: homeController.name,
+                                );
+                              } else {
+                                Navigator.popAndPushNamed(context, '/ranking');
+                              }
+                            },
+                            text: isValuer()
+                                ? 'Avaliar equipe'
+                                : 'Ranking das equipes',
                           ),
                         ),
                         SizedBox(

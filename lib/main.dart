@@ -6,6 +6,7 @@ import 'package:inspira/app/ui/pages/avaluation/avaluation_page.dart';
 import 'package:inspira/app/ui/pages/confirmation/confirmarion_page.dart';
 import 'package:inspira/app/ui/pages/home/home_page.dart';
 import 'package:inspira/app/ui/pages/login/login_page.dart';
+import 'package:inspira/app/ui/pages/ranking/ranking_page.dart';
 import 'package:inspira/app/ui/pages/splash/splash_page.dart';
 import 'package:inspira/app/ui/pages/team_selection/team_selection_page.dart';
 import 'package:inspira/firebase_options.dart';
@@ -41,6 +42,7 @@ class MainApp extends StatelessWidget {
           '/confirmation': (context) => const ConfirmationPage(),
           '/home': (context) => const HomePage(),
           '/login': (context) => const LoginPage(),
+          '/ranking': (context) => const RankingPage(),
           '/team_selection': (context) {
             final args = ModalRoute.of(context)?.settings.arguments as String;
             return TeamSelection(name: args);
