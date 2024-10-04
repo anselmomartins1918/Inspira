@@ -133,7 +133,7 @@ class AvaluationPage extends StatelessWidget {
                                   borderRadius: BorderRadius.all(
                                     Radius.circular(8.0),
                                   ),
-                                  color: Color(0xFFD7E0DB),
+                                  color: Color(0xFFF6741C),
                                 ),
                                 padding: const EdgeInsets.symmetric(
                                   horizontal: 12.0,
@@ -142,7 +142,7 @@ class AvaluationPage extends StatelessWidget {
                                 child: Text(
                                   burden[controller.actualValue],
                                   style: const TextStyle(
-                                    color: Colors.black,
+                                    color: Colors.white,
                                     fontFamily: 'Lato',
                                     fontSize: 16.0,
                                   ),
