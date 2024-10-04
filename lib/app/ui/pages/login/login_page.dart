@@ -89,6 +89,8 @@ class _LoginPageState extends State<LoginPage> {
                                   CustomTextFormField(
                                     controller: email,
                                     hintText: 'nome.sobrenome@inspira.com',
+                                    onChanged: (String text) => text =
+                                        text.toLowerCase().replaceAll(' ', ''),
                                   ),
                                 ],
                               ),
