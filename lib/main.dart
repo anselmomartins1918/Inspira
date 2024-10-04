@@ -2,10 +2,10 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:inspira/app/data/services/auth_service.dart';
-import 'package:inspira/app/ui/pages/home_page.dart';
-import 'package:inspira/app/ui/pages/login_page.dart';
-import 'package:inspira/app/ui/pages/splash_page.dart';
-import 'package:inspira/app/ui/pages/team_selection.dart';
+import 'package:inspira/app/ui/pages/home/home_page.dart';
+import 'package:inspira/app/ui/pages/login/login_page.dart';
+import 'package:inspira/app/ui/pages/splash/splash_page.dart';
+import 'package:inspira/app/ui/pages/team_selection/team_selection_page.dart';
 import 'package:inspira/firebase_options.dart';
 import 'package:provider/provider.dart';
 
