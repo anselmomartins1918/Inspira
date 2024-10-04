@@ -61,7 +61,7 @@ class RankingPage extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
                             Text(
-                              index.toString(),
+                              (index + 1).toString(),
                               style: const TextStyle(
                                 color: Color(0xFF3B3D3C),
                                 fontFamily: 'Lato',
