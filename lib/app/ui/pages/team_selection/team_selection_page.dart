@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:inspira/app/data/controllers/team_selection_controller.dart';
 
 class TeamSelection extends StatelessWidget {
   final String name;
@@ -19,6 +20,7 @@ class TeamSelection extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    TeamSelectionController controller = TeamSelectionController(name: name);
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
@@ -48,29 +50,69 @@ class TeamSelection extends StatelessWidget {
                 ),
                 itemCount: teams.length,
                 itemBuilder: (context, index) {
-                  return GestureDetector(
-                    onTap: () => Navigator.pushNamed(
-                      context,
-                      '/avaluation',
-                      arguments: [name, teams[index]],
-                    ),
-                    child: Card(
-                      color: const Color(0xFFD7E0DB),
-                      child: Stack(
-                        children: [
-                          Center(
-                            child: Text(
-                              teams[index],
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontFamily: 'Lato',
-                                fontSize: 20.0,
+                  return AnimatedBuilder(
+                    animation: controller.avaluations$,
+                    builder: (context, child) {
+                      bool isSelect = controller.avaluations
+                          .any((avaluation) => avaluation.team == teams[index]);
+
+                      return GestureDetector(
+                        onTap: () => !isSelect
+                            ? Navigator.pushNamed(
+                                context,
+                                '/avaluation',
+                                arguments: [name, teams[index]],
+                              )
+                            : null,
+                        child: Card(
+                          color: isSelect
+                              ? const Color(0xFFA6F7A7)
+                              : const Color(0xFFD7E0DB),
+                          child: Stack(
+                            children: [
+                              Center(
+                                child: Text(
+                                  teams[index],
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontFamily: 'Lato',
+                                    fontSize: 20.0,
+                                  ),
+                                ),
                               ),
-                            ),
+                              if (isSelect)
+                                Align(
+                                  alignment: Alignment.bottomCenter,
+                                  child: IntrinsicWidth(
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                        borderRadius:
+                                            BorderRadius.circular(100.0),
+                                        color: const Color(0xFF0A6844),
+                                      ),
+                                      margin:
+                                          const EdgeInsets.only(bottom: 16.0),
+                                      padding: const EdgeInsets.symmetric(
+                                        horizontal: 32.0,
+                                        vertical: 8.0,
+                                      ),
+                                      child: Text(
+                                        "${controller.avaluations.firstWhere((avaluation) => avaluation.team == teams[index]).grade} pts",
+                                        style: const TextStyle(
+                                          color: Color(0xFFA6F7A7),
+                                          fontFamily: 'Lalo',
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                            ],
                           ),
-                        ],
-                      ),
-                    ),
+                        ),
+                      );
+                    },
                   );
                 },
                 padding: const EdgeInsets.all(16.0),
