@@ -21,7 +21,8 @@ class HomePage extends StatelessWidget {
     }
 
     return Scaffold(
-      body: SizedBox(
+      body: Container(
+        color: const Color(0xFFF0F5F2),
         height: size.height,
         width: size.width,
         child: Column(
@@ -31,6 +32,7 @@ class HomePage extends StatelessWidget {
               child: SizedBox(
                 width: size.width,
                 child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
@@ -38,6 +40,18 @@ class HomePage extends StatelessWidget {
                       height: size.width * 0.4,
                       child: SvgPicture.asset('assets/logo_unifametro.svg'),
                     ),
+                    const SizedBox(height: 48.0),
+                    const Text(
+                      '‘‘Inspire confiança com seu\nolhar cuidadoso e justo’’',
+                      style: TextStyle(
+                        color: Color(0xFF032826),
+                        fontSize: 24.0,
+                        fontStyle: FontStyle.italic,
+                        fontFamily: 'Lato',
+                        fontWeight: FontWeight.w600,
+                      ),
+                      textAlign: TextAlign.center,
+                    )
                   ],
                 ),
               ),
@@ -57,43 +71,49 @@ class HomePage extends StatelessWidget {
                         topLeft: Radius.circular(64.0),
                         topRight: Radius.circular(64.0),
                       ),
-                      color: Color(0xFF05713A),
+                      color: Color(0xFF032826),
                     ),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.center,
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
-                        Text(
-                          'Olá, ${homeController.name}',
-                          style: const TextStyle(
-                            color: Colors.white,
-                            fontSize: 32.0,
-                            fontFamily: 'Lato',
-                          ),
+                        Column(
+                          children: [
+                            const Text(
+                              'Olá,   Avaliador',
+                              style: TextStyle(
+                                color: Colors.white,
+                                fontSize: 32.0,
+                                fontFamily: 'Lato',
+                              ),
+                            ),
+                            const SizedBox(height: 24.0),
+                            SizedBox(
+                              width: size.width * 0.6,
+                              child: CustomButton(
+                                onPressed: () {
+                                  if (isValuer()) {
+                                    Navigator.popAndPushNamed(
+                                      context,
+                                      '/team_selection',
+                                      arguments: homeController.name,
+                                    );
+                                  } else {
+                                    Navigator.popAndPushNamed(
+                                        context, '/ranking');
+                                  }
+                                },
+                                text: isValuer()
+                                    ? 'Avaliar equipe'
+                                    : 'Ranking das equipes',
+                              ),
+                            ),
+                          ],
                         ),
                         SizedBox(
-                          width: size.width * 0.6,
-                          child: CustomButton(
-                            onPressed: () {
-                              if (isValuer()) {
-                                Navigator.popAndPushNamed(
-                                  context,
-                                  '/team_selection',
-                                  arguments: homeController.name,
-                                );
-                              } else {
-                                Navigator.popAndPushNamed(context, '/ranking');
-                              }
-                            },
-                            text: isValuer()
-                                ? 'Avaliar equipe'
-                                : 'Ranking das equipes',
-                          ),
+                          height: size.width * 0.125,
+                          child: Image.asset('assets/logo_mude_small.png'),
                         ),
-                        // SizedBox(
-                        //   height: size.width * 0.125,
-                        //   child: Image.asset('assets/inspira.png'),
-                        // ),
                       ],
                     ),
                   );

@@ -27,21 +27,29 @@ class SplashPage extends StatelessWidget {
           children: [
             Container(),
             SizedBox(
-              width: size.width * 0.5,
+              width: size.width * 0.8,
               height: size.width * 0.5,
-              child: SvgPicture.asset('assets/logo_mude_big.svg'),
+              child: Image.asset('assets/logo_mude_big.png'),
             ),
-            RichText(
-              text: const TextSpan(
-                text: 'Produzido por ',
-                style: TextStyle(color: Colors.white, fontSize: 20.0),
-                children: [
-                  TextSpan(
-                    text: 'Hub de Inovação Unifametro',
-                    style: TextStyle(color: Color(0xFFF9A053), fontSize: 20.0),
+            Row(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Text(
+                  'Criado por',
+                  style: TextStyle(
+                    color: Color(0xFFC9F8C9),
+                    fontSize: 16.0,
+                    fontFamily: 'Lato',
+                    fontWeight: FontWeight.w400,
                   ),
-                ],
-              ),
+                ),
+                const SizedBox(width: 8.0),
+                SvgPicture.asset(
+                  'assets/logo_ulabs.svg',
+                  width: size.width * 0.3,
+                ),
+              ],
             ),
           ],
         ),

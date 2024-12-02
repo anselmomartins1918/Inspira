@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inspira/app/data/controllers/login_controller.dart';
 import 'package:inspira/app/data/services/auth_service.dart';
 import 'package:inspira/app/ui/widgets/custom_button.dart';
@@ -37,8 +36,8 @@ class _LoginPageState extends State<LoginPage> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     SizedBox(
-                      height: size.width * 0.2,
-                      child: SvgPicture.asset('assets/logo_mude_big.svg'),
+                      height: size.width * 0.4,
+                      child: Image.asset('assets/logo_mude_big.png'),
                     ),
                   ],
                 ),
