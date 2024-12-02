@@ -16,7 +16,7 @@ class SplashPage extends StatelessWidget {
     );
 
     return Scaffold(
-      backgroundColor: const Color(0xFF05713A),
+      backgroundColor: const Color(0xFF032826),
       body: Container(
         height: size.height,
         width: size.width,
@@ -29,7 +29,7 @@ class SplashPage extends StatelessWidget {
             SizedBox(
               width: size.width * 0.5,
               height: size.width * 0.5,
-              child: SvgPicture.asset('assets/logo_unifametro_branco.svg'),
+              child: SvgPicture.asset('assets/logo_mude_big.svg'),
             ),
             RichText(
               text: const TextSpan(

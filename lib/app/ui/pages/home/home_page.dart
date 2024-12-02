@@ -90,10 +90,10 @@ class HomePage extends StatelessWidget {
                                 : 'Ranking das equipes',
                           ),
                         ),
-                        SizedBox(
-                          height: size.width * 0.125,
-                          child: Image.asset('assets/inspira.png'),
-                        ),
+                        // SizedBox(
+                        //   height: size.width * 0.125,
+                        //   child: Image.asset('assets/inspira.png'),
+                        // ),
                       ],
                     ),
                   );
