@@ -2,23 +2,22 @@ import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 class AvaluantionController {
+  ValueNotifier<int> avaluation$ = ValueNotifier<int>(0);
+  int get avaluation => avaluation$.value;
+
   ValueNotifier<int> actualValue$ = ValueNotifier<int>(0);
   int get actualValue => actualValue$.value;
 
   ValueNotifier<List<int>> grades$ = ValueNotifier<List<int>>([0, 0, 0, 0]);
   List<int> get grades => grades$.value;
 
-  void increment() {
-    actualValue$.value = actualValue + 1;
-  }
+  void changeAvaluation(int value) => avaluation$.value = value;
 
-  void decrement() {
-    actualValue$.value = actualValue - 1;
-  }
+  void increment() => actualValue$.value = actualValue + 1;
 
-  void navigateTo({required int index}) {
-    actualValue$.value = index;
-  }
+  void decrement() => actualValue$.value = actualValue - 1;
+
+  void navigateTo({required int index}) => actualValue$.value = index;
 
   bool verifyComplete() {
     return (grades[0] != 0 &&

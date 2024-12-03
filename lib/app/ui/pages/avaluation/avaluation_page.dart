@@ -1,39 +1,30 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:inspira/app/data/controllers/avaluantion_controller.dart';
-import 'package:inspira/app/ui/widgets/custom_button.dart';
 
 class AvaluationPage extends StatelessWidget {
   final String name;
   final String team;
 
-  const AvaluationPage({
+  AvaluationPage({
     required this.name,
     required this.team,
     super.key,
   });
 
-  static const Map<String, String> themes = {
-    'Equipe 1': 'Mercados de Educação Brasileira',
-    'Equipe 2': 'Concorrência no Setor Educacional',
-    'Equipe 3': 'Tecnologia e Inovação na Educação',
-    'Equipe 4': 'Criação de Produtos Inovadores para a Unifametro',
-    'Equipe 5': 'Transformação e Criação de uma Nova Unifametro',
-    'Equipe 6': 'Experiência do Aluno no Contexto Educacional',
-  };
-
-  static const List<String> burden = [
-    'Peso: 3',
-    'Peso: 3',
-    'Peso: 2',
-    'Peso: 1',
-  ];
-
   static const List<String> types = [
-    'Grau de aderência da solução ao desafio de captação e permanência de alunos',
-    'Potencial de implementação real com base no custo benefício',
-    'Grau de Inovação da Solução comparado ao Estado do Ceará',
-    'Grau de Simplicidade da solução: promove uma experiência mais eficiente e acessível tanto para os usuários experientes como para novatos',
+    'Relevância do Problema',
+    'Diferenciação da solução',
+    'Alinhamento do negócio com as ODS da Agenda 2030',
+    'Grau de escalabilidade, viabilidade da solução',
+    'Mercado relevante e com potencial',
+    'Qualidade da Validação e Problema',
+    'MVP (Protótipo)',
+    'Qualidade da Apresentação (clareza, emoção, design)',
   ];
+
+  final CarouselSliderController carouselSliderController =
+      CarouselSliderController();
 
   @override
   Widget build(BuildContext context) {
@@ -41,234 +32,238 @@ class AvaluationPage extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: PreferredSize(
+        preferredSize: const Size.fromHeight(64.0),
+        child: ClipRRect(
+          borderRadius: const BorderRadius.only(
+            bottomLeft: Radius.circular(40.0),
+            bottomRight: Radius.circular(40.0),
+          ),
+          child: AppBar(
+            backgroundColor: const Color(0xFF032826),
+            leadingWidth: 0.0,
+            title: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                IconButton(
+                  color: Colors.white,
+                  icon: const Icon(Icons.arrow_back_ios_new),
+                  iconSize: 24.0,
+                  onPressed: () => Navigator.pop(context),
+                ),
+                const Text(
+                  'Avaliação de Equipe',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontFamily: 'Lato',
+                    fontSize: 24.0,
+                  ),
+                ),
+                Container(),
+              ],
+            ),
+          ),
+        ),
+      ),
       body: Container(
         height: size.height,
         width: size.width,
-        margin: const EdgeInsets.symmetric(horizontal: 48.0, vertical: 64.0),
+        margin: const EdgeInsets.symmetric(horizontal: 32.0, vertical: 48.0),
         child: AnimatedBuilder(
           animation: controller.actualValue$,
           builder: (context, child) {
             return Column(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Stack(
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    IconButton(
-                      color: const Color(0xFFF6741C),
-                      icon: const Icon(Icons.arrow_back_ios_new),
-                      iconSize: 32.0,
-                      onPressed: () => Navigator.pop(context),
-                    ),
-                    const SizedBox(
-                      height: 48.0,
-                      child: Row(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Text(
-                            'Avaliação de Equipe',
-                            style: TextStyle(
-                              color: Color(0xFF0A6844),
-                              fontFamily: 'Lato',
-                              fontSize: 24.0,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ),
-                  ],
-                ),
-                if (controller.actualValue != 4)
-                  IntrinsicHeight(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.center,
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        IntrinsicHeight(
-                          child: SizedBox(
-                            width: size.width,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  team,
-                                  style: const TextStyle(
-                                    color: Color(0xFF05713A),
-                                    fontFamily: 'Lato',
-                                    fontSize: 16.0,
-                                  ),
-                                ),
-                                const SizedBox(height: 8.0),
-                                IntrinsicWidth(
-                                  child: Container(
-                                    decoration: const BoxDecoration(
-                                      borderRadius: BorderRadius.all(
-                                        Radius.circular(8.0),
-                                      ),
-                                      color: Color(0xFFA6F7A7),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 12.0,
-                                      vertical: 8.0,
-                                    ),
-                                    child: Text(
-                                      themes[team] ?? '',
-                                      textAlign: TextAlign.center,
-                                      style: const TextStyle(
-                                        color: Color(0xFF05713A),
-                                        fontFamily: 'Lato',
-                                        fontSize: 16.0,
-                                      ),
-                                    ),
-                                  ),
-                                ),
-                              ],
+                        const Text(
+                          'Você está avaliando',
+                          style: TextStyle(
+                            color: Color(0xFF032826),
+                            fontFamily: 'Lato',
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: 8.0),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color(0xFFF6741C),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8.0,
+                            horizontal: 24.0,
+                          ),
+                          child: Text(
+                            team,
+                            style: const TextStyle(
+                              color: Color(0xFFF6741C),
+                              fontFamily: 'Lato',
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w700,
                             ),
                           ),
                         ),
-                        const SizedBox(height: 32.0),
-                        IntrinsicHeight(
+                      ],
+                    ),
+                    Column(
+                      crossAxisAlignment: CrossAxisAlignment.end,
+                      children: [
+                        const Text(
+                          'Pontuação Atribuída',
+                          style: TextStyle(
+                            color: Color(0xFF032826),
+                            fontFamily: 'Lato',
+                            fontSize: 16.0,
+                            fontWeight: FontWeight.w400,
+                          ),
+                        ),
+                        const SizedBox(height: 8.0),
+                        Container(
+                          decoration: BoxDecoration(
+                            border: Border.all(
+                              color: const Color(0xFFF6741C),
+                              width: 1.0,
+                            ),
+                            borderRadius: BorderRadius.circular(12.0),
+                          ),
+                          padding: const EdgeInsets.symmetric(
+                            vertical: 8.0,
+                            horizontal: 24.0,
+                          ),
+                          child: const Text(
+                            '0/80pts',
+                            style: TextStyle(
+                              color: Color(0xFFF6741C),
+                              fontFamily: 'Lato',
+                              fontSize: 20.0,
+                              fontWeight: FontWeight.w700,
+                            ),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ],
+                ),
+                IntrinsicHeight(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.center,
+                    children: [
+                      IntrinsicHeight(
+                        child: SizedBox(
+                          width: size.width,
                           child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
-                                decoration: const BoxDecoration(
-                                  borderRadius: BorderRadius.all(
-                                    Radius.circular(8.0),
-                                  ),
-                                  color: Color(0xFFF6741C),
-                                ),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 12.0,
-                                  vertical: 8.0,
-                                ),
-                                child: Text(
-                                  burden[controller.actualValue],
-                                  style: const TextStyle(
-                                    color: Colors.white,
-                                    fontFamily: 'Lato',
-                                    fontSize: 16.0,
-                                  ),
+                              Text(
+                                'Critério ${controller.actualValue + 1}/8',
+                                style: const TextStyle(
+                                  color: Color(0xFF078438),
+                                  fontFamily: 'Lato',
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w400,
                                 ),
                               ),
-                              const SizedBox(height: 16.0),
                               Text(
                                 types[controller.actualValue],
-                                textAlign: TextAlign.center,
+                                textAlign: TextAlign.start,
                                 style: const TextStyle(
-                                  color: Color(0xFF05713A),
+                                  color: Color(0xFF032826),
                                   fontFamily: 'Lalo',
-                                  fontSize: 22.0,
+                                  fontSize: 28.0,
                                   fontWeight: FontWeight.bold,
                                 ),
-                              ),
-                              const SizedBox(height: 32.0),
-                              AnimatedBuilder(
-                                animation: controller.grades$,
-                                builder: (context, child) {
-                                  return Row(
-                                    mainAxisAlignment:
-                                        MainAxisAlignment.spaceAround,
-                                    children: [
-                                      GestureDetector(
-                                        onTap: () =>
-                                            controller.setValue(value: 1),
-                                        child: Stack(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  color: controller
-                                                          .verifyMarked(
-                                                              value: 1)
-                                                      ? Colors.green
-                                                      : const Color(0xFFD7E0DB),
-                                                  shape: BoxShape.circle),
-                                              padding:
-                                                  const EdgeInsets.all(32.0),
-                                              child: const Text(
-                                                '1',
-                                                style: TextStyle(
-                                                  color: Color(0xFF141414),
-                                                  fontFamily: 'Lalo',
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () =>
-                                            controller.setValue(value: 2),
-                                        child: Stack(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  color: controller
-                                                          .verifyMarked(
-                                                              value: 2)
-                                                      ? Colors.green
-                                                      : const Color(0xFFD7E0DB),
-                                                  shape: BoxShape.circle),
-                                              padding:
-                                                  const EdgeInsets.all(32.0),
-                                              child: const Text(
-                                                '2',
-                                                style: TextStyle(
-                                                  color: Color(0xFF141414),
-                                                  fontFamily: 'Lalo',
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                      GestureDetector(
-                                        onTap: () =>
-                                            controller.setValue(value: 3),
-                                        child: Stack(
-                                          children: [
-                                            Container(
-                                              decoration: BoxDecoration(
-                                                  color: controller
-                                                          .verifyMarked(
-                                                              value: 3)
-                                                      ? Colors.green
-                                                      : const Color(0xFFD7E0DB),
-                                                  shape: BoxShape.circle),
-                                              padding:
-                                                  const EdgeInsets.all(32.0),
-                                              child: const Text(
-                                                '3',
-                                                style: TextStyle(
-                                                  color: Color(0xFF141414),
-                                                  fontFamily: 'Lalo',
-                                                  fontSize: 24.0,
-                                                  fontWeight: FontWeight.bold,
-                                                ),
-                                              ),
-                                            ),
-                                          ],
-                                        ),
-                                      ),
-                                    ],
-                                  );
-                                },
                               ),
                             ],
                           ),
                         ),
-                        const SizedBox(height: 48.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            CustomButton(
-                              backgroundColor: Colors.white,
-                              borderColor: const Color(0xFFF6741C),
-                              prefixIcon: Icons.arrow_back_ios_new,
-                              iconColor: const Color(0xFFF6741C),
-                              text: 'Voltar',
-                              textColor: const Color(0xFFF6741C),
+                      ),
+                      const SizedBox(height: 32.0),
+                      AnimatedBuilder(
+                        animation: controller.avaluation$,
+                        builder: (context, child) {
+                          return CarouselSlider.builder(
+                            carouselController: carouselSliderController,
+                            itemCount: 11,
+                            itemBuilder: (context, index, ind) {
+                              return GestureDetector(
+                                onTap: () {
+                                  controller.changeAvaluation(index);
+                                  carouselSliderController.jumpToPage(index);
+                                },
+                                child: Center(
+                                  child: Container(
+                                    decoration: BoxDecoration(
+                                      color: controller.avaluation == index
+                                          ? const Color(0xFFFEEED1)
+                                          : null,
+                                      border: controller.avaluation == index
+                                          ? Border.all(
+                                              color: const Color(0xFFF6741C))
+                                          : null,
+                                      borderRadius: BorderRadius.circular(12.0),
+                                    ),
+                                    padding: const EdgeInsets.symmetric(
+                                      horizontal: 32.0,
+                                    ),
+                                    child: Text(
+                                      '$index',
+                                      style: const TextStyle(
+                                        color: Color(0xFFF6741C),
+                                        fontFamily: 'lato',
+                                        fontSize: 120.0,
+                                        fontWeight: FontWeight.w800,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              );
+                            },
+                            options: CarouselOptions(
+                              enableInfiniteScroll: false,
+                              aspectRatio: 2.0,
+                              enlargeCenterPage: true,
+                              enlargeStrategy: CenterPageEnlargeStrategy.height,
+                              viewportFraction: 0.45,
+                              pageSnapping: false,
+                              onPageChanged: (index, reason) =>
+                                  controller.changeAvaluation(index),
+                            ),
+                          );
+                        },
+                      ),
+                      const SizedBox(height: 48.0),
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          SizedBox(
+                            height: 92.0,
+                            width: size.width * 0.25,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                side: const BorderSide(
+                                  color: Color(0xFFF6741C),
+                                  width: 2.0,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                              ),
+                              child: const Icon(
+                                Icons.arrow_back_ios_new,
+                                color: Color(0xFFF6741C),
+                                size: 24.0,
+                              ),
                               onPressed: () {
                                 if (controller.actualValue == 0) {
                                   Navigator.pop(context);
@@ -277,189 +272,56 @@ class AvaluationPage extends StatelessWidget {
                                 }
                               },
                             ),
-                            CustomButton(
-                              text: controller.actualValue != 3
-                                  ? 'Próximo Critério'
-                                  : 'Revisar avaliação',
-                              suffixIcon: Icons.arrow_forward_ios,
+                          ),
+                          SizedBox(
+                            height: 92.0,
+                            width: size.width * 0.6,
+                            child: TextButton(
+                              style: TextButton.styleFrom(
+                                backgroundColor: const Color(0xFFF6741C),
+                                side: const BorderSide(
+                                  color: Color(0xFFF6741C),
+                                  width: 2.0,
+                                ),
+                                shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(12.0),
+                                ),
+                              ),
+                              child: Row(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                children: [
+                                  Text(
+                                    controller.actualValue != 8
+                                        ? 'Próximo Critério'
+                                        : 'Avaliar Equipe em 50pts',
+                                    style: const TextStyle(
+                                      color: Color(0xFFF0F5F2),
+                                      fontFamily: 'Lato',
+                                      fontSize: 20.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ),
+                                  const SizedBox(width: 12.0),
+                                  const Icon(
+                                    Icons.arrow_forward_ios,
+                                    color: Color(0xFFF0F5F2),
+                                    size: 24.0,
+                                  ),
+                                ],
+                              ),
                               onPressed: () => controller.increment(),
                             ),
-                          ],
-                        )
-                      ],
-                    ),
+                          ),
+                        ],
+                      )
+                    ],
                   ),
-                if (controller.actualValue == 4)
-                  IntrinsicHeight(
-                    child: Column(
-                      children: [
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              children: [
-                                const Text(
-                                  'Critério 1',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Lato',
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                      color: Color(0xFFD9D9D9),
-                                      shape: BoxShape.circle),
-                                  padding: const EdgeInsets.all(32.0),
-                                  child: Text(
-                                    '${controller.grades[0] * 3}\npts',
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: Color(0xFF141414),
-                                      fontFamily: 'Lalo',
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(width: 16.0),
-                            Column(
-                              children: [
-                                const Text(
-                                  'Critério 2',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Lato',
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                      color: Color(0xFFD9D9D9),
-                                      shape: BoxShape.circle),
-                                  padding: const EdgeInsets.all(32.0),
-                                  child: Text(
-                                    '${controller.grades[1] * 3}\npts',
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: Color(0xFF141414),
-                                      fontFamily: 'Lalo',
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(height: 16.0),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Column(
-                              children: [
-                                const Text(
-                                  'Critério 3',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Lato',
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                      color: Color(0xFFD9D9D9),
-                                      shape: BoxShape.circle),
-                                  padding: const EdgeInsets.all(32.0),
-                                  child: Text(
-                                    '${controller.grades[2] * 2}\npts',
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: Color(0xFF141414),
-                                      fontFamily: 'Lalo',
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(width: 16.0),
-                            Column(
-                              children: [
-                                const Text(
-                                  'Critério 4',
-                                  style: TextStyle(
-                                    color: Colors.black,
-                                    fontFamily: 'Lato',
-                                    fontSize: 20.0,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Container(
-                                  decoration: const BoxDecoration(
-                                      color: Color(0xFFD9D9D9),
-                                      shape: BoxShape.circle),
-                                  padding: const EdgeInsets.all(32.0),
-                                  child: Text(
-                                    '${controller.grades[3] * 1}\npts',
-                                    textAlign: TextAlign.center,
-                                    style: const TextStyle(
-                                      color: Color(0xFF141414),
-                                      fontFamily: 'Lalo',
-                                      fontSize: 24.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
-                                ),
-                              ],
-                            ),
-                          ],
-                        ),
-                        const SizedBox(
-                          height: 24.0,
-                        ),
-                        CustomButton(
-                          text:
-                              'Confirmar Avaliação com ${controller.grades[0] * 3 + controller.grades[1] * 3 + controller.grades[2] * 2 + controller.grades[3] * 1} pts',
-                          suffixIcon: Icons.arrow_forward_ios,
-                          onPressed: controller.verifyComplete()
-                              ? () async {
-                                  bool confirmed = await controller
-                                      .sendAvaluation(team: team, valuer: name);
-
-                                  if (context.mounted) {
-                                    if (confirmed) {
-                                      Navigator.pushNamed(
-                                        context,
-                                        '/confirmation',
-                                      );
-                                    } else {
-                                      ScaffoldMessenger.of(context)
-                                          .showSnackBar(
-                                        const SnackBar(
-                                          content: Text(
-                                            'Não foi possível concluir a avaliação. Por favor, entre em contato com o suporte!',
-                                          ),
-                                        ),
-                                      );
-                                    }
-                                  }
-                                }
-                              : null,
-                        ),
-                      ],
-                    ),
-                  ),
-                IntrinsicHeight(
+                ),
+                SizedBox(
+                  height: 80.0,
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
+                    mainAxisAlignment: MainAxisAlignment.center,
                     children: [
                       const Text(
                         'Critérios',
@@ -470,181 +332,52 @@ class AvaluationPage extends StatelessWidget {
                           fontWeight: FontWeight.bold,
                         ),
                       ),
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Row(
-                            children: [
-                              GestureDetector(
-                                onTap: () {
-                                  if (controller.actualValue != 0) {
-                                    controller.navigateTo(index: 0);
-                                  }
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100.0),
-                                        color: controller.actualValue == 0
-                                            ? const Color(0xFFB0B8B3)
-                                            : const Color(0xFFD7E0DB),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 24.0,
-                                        vertical: 8.0,
-                                      ),
-                                      child: const Text(
-                                        '1',
-                                        style: TextStyle(
-                                          color: Color(0xFF141414),
-                                          fontFamily: 'Lalo',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 8.0),
-                              GestureDetector(
-                                onTap: () {
-                                  if (controller.actualValue != 1) {
-                                    controller.navigateTo(index: 1);
-                                  }
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100.0),
-                                        color: controller.actualValue == 1
-                                            ? const Color(0xFFB0B8B3)
-                                            : const Color(0xFFD7E0DB),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 24.0,
-                                        vertical: 8.0,
-                                      ),
-                                      child: const Text(
-                                        '2',
-                                        style: TextStyle(
-                                          color: Color(0xFF141414),
-                                          fontFamily: 'Lalo',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 8.0),
-                              GestureDetector(
-                                onTap: () {
-                                  if (controller.actualValue != 2) {
-                                    controller.navigateTo(index: 2);
-                                  }
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100.0),
-                                        color: controller.actualValue == 2
-                                            ? const Color(0xFFB0B8B3)
-                                            : const Color(0xFFD7E0DB),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 24.0,
-                                        vertical: 8.0,
-                                      ),
-                                      child: const Text(
-                                        '3',
-                                        style: TextStyle(
-                                          color: Color(0xFF141414),
-                                          fontFamily: 'Lalo',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                              const SizedBox(width: 8.0),
-                              GestureDetector(
-                                onTap: () {
-                                  if (controller.actualValue != 3) {
-                                    controller.navigateTo(index: 3);
-                                  }
-                                },
-                                child: Stack(
-                                  children: [
-                                    Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius:
-                                            BorderRadius.circular(100.0),
-                                        color: controller.actualValue == 3
-                                            ? const Color(0xFFB0B8B3)
-                                            : const Color(0xFFD7E0DB),
-                                      ),
-                                      padding: const EdgeInsets.symmetric(
-                                        horizontal: 24.0,
-                                        vertical: 8.0,
-                                      ),
-                                      child: const Text(
-                                        '4',
-                                        style: TextStyle(
-                                          color: Color(0xFF141414),
-                                          fontFamily: 'Lalo',
-                                          fontSize: 16.0,
-                                          fontWeight: FontWeight.bold,
-                                        ),
-                                      ),
-                                    ),
-                                  ],
-                                ),
-                              ),
-                            ],
-                          ),
-                          GestureDetector(
-                            onTap: () {
-                              if (controller.actualValue != 4) {
-                                controller.navigateTo(index: 4);
-                              }
-                            },
-                            child: Stack(
-                              children: [
-                                Container(
-                                  decoration: BoxDecoration(
-                                    borderRadius: BorderRadius.circular(100.0),
-                                    color: controller.actualValue == 4
-                                        ? const Color(0xFFB0B8B3)
-                                        : const Color(0xFFD7E0DB),
+                      const SizedBox(height: 8.0),
+                      SizedBox(
+                        height: 40.0,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: types.length + 1,
+                          itemBuilder: (context, index) {
+                            return GestureDetector(
+                              onTap: () => controller.navigateTo(index: index),
+                              child: Container(
+                                height: 40.0,
+                                decoration: BoxDecoration(
+                                  color: index == controller.actualValue
+                                      ? const Color(0xFFFEEED1)
+                                      : Colors.white,
+                                  border: Border.all(
+                                    color: index == controller.actualValue
+                                        ? const Color(0xFFF6741C)
+                                        : const Color(0xFF141414),
                                   ),
-                                  padding: const EdgeInsets.symmetric(
-                                    horizontal: 24.0,
-                                    vertical: 8.0,
-                                  ),
-                                  child: const Text(
-                                    'Confirmação',
-                                    style: TextStyle(
-                                      color: Color(0xFF141414),
-                                      fontFamily: 'Lalo',
-                                      fontSize: 16.0,
-                                      fontWeight: FontWeight.bold,
-                                    ),
-                                  ),
+                                  borderRadius: BorderRadius.circular(36.0),
                                 ),
-                              ],
-                            ),
-                          ),
-                        ],
+                                margin: EdgeInsets.only(
+                                    left: index != 0 ? 8.0 : 0.0, bottom: 2.0),
+                                padding: const EdgeInsets.symmetric(
+                                    horizontal: 32.0),
+                                child: Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Text(
+                                      index != 8
+                                          ? (index + 1).toString()
+                                          : 'Confirmação',
+                                      style: TextStyle(
+                                        color: index == controller.actualValue
+                                            ? const Color(0xFFF6741C)
+                                            : const Color(0xFF141414),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+                          },
+                        ),
                       ),
                     ],
                   ),
