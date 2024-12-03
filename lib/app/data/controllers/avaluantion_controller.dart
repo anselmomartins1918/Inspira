@@ -42,7 +42,7 @@ class AvaluantionController {
   }) async {
     try {
       DocumentReference docRef =
-          FirebaseFirestore.instance.collection('avaluations').doc(valuer);
+          FirebaseFirestore.instance.collection('mude-avaluations').doc(valuer);
 
       DocumentSnapshot doc = await docRef.get();
 

@@ -17,7 +17,7 @@ class TeamSelectionController {
 
   void listening() {
     FirebaseFirestore.instance
-        .collection('avaluations')
+        .collection('mude-avaluations')
         .doc(name)
         .snapshots()
         .listen((DocumentSnapshot documentSnapshot) {

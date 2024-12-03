@@ -12,7 +12,7 @@ class RankingController {
 
   void _listening() {
     FirebaseFirestore.instance
-        .collection('avaluations')
+        .collection('mude-avaluations')
         .snapshots()
         .listen((snapshot) async {
       _fetchDocuments();
@@ -21,7 +21,7 @@ class RankingController {
 
   Future<void> _fetchDocuments() async {
     QuerySnapshot snapshot =
-        await FirebaseFirestore.instance.collection('avaluations').get();
+        await FirebaseFirestore.instance.collection('mude-avaluations').get();
 
     List<Map<String, dynamic>> documents =
         snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
