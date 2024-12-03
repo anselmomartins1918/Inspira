@@ -1,7 +1,4 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:inspira/app/data/controllers/ranking_controller.dart';
 
 class RankingPage extends StatelessWidget {
@@ -13,94 +10,327 @@ class RankingPage extends StatelessWidget {
 
     Size size = MediaQuery.of(context).size;
     return Scaffold(
-      body: Container(
+      backgroundColor: Colors.white,
+      body: SizedBox(
         height: size.height,
         width: size.width,
-        margin: const EdgeInsets.symmetric(horizontal: 48.0, vertical: 64.0),
         child: AnimatedBuilder(
           animation: controller.teams$,
           builder: (context, child) {
-            log(controller.teams.toString());
             return Column(
               children: [
-                SizedBox(
-                  width: size.width * 0.2,
-                  height: size.width * 0.2,
-                  child: SvgPicture.asset('assets/logo_unifametro.svg'),
-                ),
-                const SizedBox(height: 48.0),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: controller.teams.length,
-                    itemBuilder: (context, index) {
-                      return Container(
-                        margin: EdgeInsets.only(top: index != 0 ? 8.0 : 0.0),
-                        height: 80.0,
-                        decoration: BoxDecoration(
-                          gradient: index < 3
-                              ? LinearGradient(
-                                  colors: [
-                                    index == 0
-                                        ? const Color(0xFFFFD545)
-                                        : index == 1
-                                            ? const Color(0xFFD7E0DB)
-                                            : const Color(0xFFF9A053),
-                                    index == 0
-                                        ? const Color(0xFFDBA005)
-                                        : index == 1
-                                            ? const Color(0xFFB0B8B3)
-                                            : const Color(0xFFD35614)
-                                  ], // Cores do degradê
-                                  begin: Alignment.centerLeft,
-                                  end: Alignment.centerRight,
-                                )
-                              : null,
-                          borderRadius: BorderRadius.circular(16.0),
+                  flex: 25,
+                  child: Container(
+                    width: size.width,
+                    decoration: const BoxDecoration(
+                      borderRadius: BorderRadius.only(
+                        bottomLeft: Radius.circular(100.0),
+                      ),
+                      color: Color(0xFF032826),
+                    ),
+                    child: Center(
+                      child: Transform.scale(
+                        scale: 0.5,
+                        child: Image.asset('assets/logo_mude_big.png'),
+                      ),
+                    ),
+                  ),
+                ),
+                Expanded(
+                  flex: 75,
+                  child: Padding(
+                    padding: const EdgeInsets.symmetric(
+                      horizontal: 32.0,
+                      vertical: 60.0,
+                    ),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text(
+                          'Ranking Geral',
+                          style: TextStyle(
+                            color: Color(0xFF032826),
+                            fontSize: 32.0,
+                            fontFamily: 'Lato',
+                            fontWeight: FontWeight.w600,
+                          ),
                         ),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
+                        const SizedBox(height: 24.0),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Text(
-                              (index + 1).toString(),
-                              style: const TextStyle(
-                                color: Color(0xFF3B3D3C),
-                                fontFamily: 'Lato',
-                                fontSize: 20.0,
-                              ),
-                            ),
-                            const SizedBox(width: 24.0),
-                            Text(
-                              controller.teams[index].name,
-                              style: const TextStyle(
-                                color: Color(0xFF3B3D3C),
-                                fontFamily: 'Lato',
-                                fontSize: 28.0,
-                                fontWeight: FontWeight.bold,
-                              ),
-                            ),
-                            const SizedBox(width: 24.0),
-                            Text(
-                              '${controller.teams[index].total}pts',
-                              style: const TextStyle(
-                                color: Color(0xFF3B3D3C),
-                                fontFamily: 'Lato',
-                                fontSize: 20.0,
-                              ),
-                            ),
-                            if (index < 3)
-                              Container(
-                                margin: const EdgeInsets.only(left: 24.0),
-                                child: const Icon(
-                                  Icons.workspace_premium,
-                                  size: 32.0,
-                                  color: Colors.white,
+                            Visibility(
+                              visible: controller.teams.isNotEmpty,
+                              child: Container(
+                                height: 120.0,
+                                width: size.width * 0.4,
+                                padding: const EdgeInsets.all(3.0),
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    colors: [
+                                      Color(0xFFFFD545),
+                                      Color(0xFFDBA005)
+                                    ], // Gradiente dourado
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(36.0),
+                                ),
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(36.0),
+                                      ),
+                                      child: const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                '500pts',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'Lato',
+                                                  fontSize: 24.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Equipe 4',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'Lato',
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: -16.0,
+                                      left: size.width * 0.125,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 24.0,
+                                          vertical: 8.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color(0xFFFFD545),
+                                              Color(0xFFDBA005)
+                                            ],
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(36.0),
+                                        ),
+                                        child: const Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              '1',
+                                              style: TextStyle(
+                                                color: Color(0xFF141414),
+                                                fontFamily: 'Lato',
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                            SizedBox(width: 8.0),
+                                            Icon(
+                                              Icons.workspace_premium,
+                                              color: Colors.black,
+                                              size: 16.0,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
                                 ),
                               ),
-                            if (index > 2) const SizedBox(width: 56.0)
+                            ),
+                            Visibility(
+                              visible: controller.teams.length > 1,
+                              child: Container(
+                                height: 120.0,
+                                width: size.width * 0.4,
+                                padding: const EdgeInsets.all(3.0),
+                                decoration: BoxDecoration(
+                                  gradient: const LinearGradient(
+                                    colors: [
+                                      Color(0xFFD7E0DB),
+                                      Color(0xFFB0B8B3)
+                                    ],
+                                    begin: Alignment.centerLeft,
+                                    end: Alignment.centerRight,
+                                  ),
+                                  borderRadius: BorderRadius.circular(36.0),
+                                ),
+                                child: Stack(
+                                  clipBehavior: Clip.none,
+                                  children: [
+                                    Container(
+                                      decoration: BoxDecoration(
+                                        color: Colors.white,
+                                        borderRadius:
+                                            BorderRadius.circular(36.0),
+                                      ),
+                                      child: const Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          Column(
+                                            mainAxisAlignment:
+                                                MainAxisAlignment.center,
+                                            children: [
+                                              Text(
+                                                '500pts',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'Lato',
+                                                  fontSize: 24.0,
+                                                  fontWeight: FontWeight.bold,
+                                                ),
+                                              ),
+                                              Text(
+                                                'Equipe 4',
+                                                style: TextStyle(
+                                                  color: Colors.black,
+                                                  fontFamily: 'Lato',
+                                                  fontSize: 16.0,
+                                                  fontWeight: FontWeight.w400,
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ],
+                                      ),
+                                    ),
+                                    Positioned(
+                                      bottom: -16.0,
+                                      left: size.width * 0.125,
+                                      child: Container(
+                                        padding: const EdgeInsets.symmetric(
+                                          horizontal: 24.0,
+                                          vertical: 8.0,
+                                        ),
+                                        decoration: BoxDecoration(
+                                          gradient: const LinearGradient(
+                                            colors: [
+                                              Color(0xFFD7E0DB),
+                                              Color(0xFFB0B8B3)
+                                            ],
+                                            begin: Alignment.centerLeft,
+                                            end: Alignment.centerRight,
+                                          ),
+                                          borderRadius:
+                                              BorderRadius.circular(36.0),
+                                        ),
+                                        child: const Row(
+                                          mainAxisSize: MainAxisSize.min,
+                                          children: [
+                                            Text(
+                                              '2',
+                                              style: TextStyle(
+                                                color: Color(0xFF141414),
+                                                fontFamily: 'Lato',
+                                                fontSize: 16.0,
+                                                fontWeight: FontWeight.w700,
+                                              ),
+                                            ),
+                                            SizedBox(width: 8.0),
+                                            Icon(
+                                              Icons.workspace_premium,
+                                              color: Colors.black,
+                                              size: 16.0,
+                                            ),
+                                          ],
+                                        ),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
                           ],
                         ),
-                      );
-                    },
+                        const SizedBox(height: 36.0),
+                        Expanded(
+                          child: ListView.separated(
+                            itemCount: (controller.teams.length > 2)
+                                ? controller.teams.length - 2
+                                : 0,
+                            itemBuilder: (context, index) {
+                              int listIndex = index + 2;
+
+                              return Container(
+                                height: 64.0,
+                                decoration: const BoxDecoration(
+                                  color: Colors.transparent,
+                                ),
+                                child: Padding(
+                                  padding: const EdgeInsets.all(16.0),
+                                  child: Row(
+                                    children: [
+                                      Text(
+                                        (listIndex + 1).toString(),
+                                        style: const TextStyle(
+                                          color: Color(0xFFF6741C),
+                                          fontFamily: 'Lato',
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                      const SizedBox(width: 24.0),
+                                      Text(
+                                        controller.teams[listIndex].name,
+                                        style: const TextStyle(
+                                          color: Color(0xFF3B3D3C),
+                                          fontFamily: 'Lato',
+                                          fontSize: 24.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      const Spacer(),
+                                      Text(
+                                        '${controller.teams[listIndex].total}pts',
+                                        style: const TextStyle(
+                                          color: Colors.black,
+                                          fontFamily: 'Lato',
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.w600,
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              );
+                            },
+                            separatorBuilder: (context, index) {
+                              return Container(
+                                color: const Color(0xFFB0B8B3),
+                                height: 1.0,
+                                width: size.width,
+                              );
+                            },
+                          ),
+                        ),
+                      ],
+                    ),
                   ),
                 ),
               ],

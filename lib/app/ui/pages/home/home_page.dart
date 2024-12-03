@@ -17,7 +17,7 @@ class HomePage extends StatelessWidget {
     String? email = context.read<AuthService>().user?.email;
 
     bool isValuer() {
-      return email != 'laura.coelho@inspira.com';
+      return email != 'admin@mude.com';
     }
 
     return Scaffold(
