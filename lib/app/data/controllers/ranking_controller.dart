@@ -36,7 +36,7 @@ class RankingController {
           int index = teams.indexWhere((element) => element.name == key);
 
           teams$.value[index] =
-              Team(name: key, total: teams[index].total + value as int);
+              Team(name: key, total: teams[index].total + value);
         } else {
           teams$.value.add(Team(name: key, total: value));
         }

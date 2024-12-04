@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:inspira/app/data/controllers/ranking_controller.dart';
+import 'package:inspira/app/data/utils.dart';
 
 class RankingPage extends StatelessWidget {
   const RankingPage({super.key});
@@ -86,7 +87,7 @@ class RankingPage extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(36.0),
                                       ),
-                                      child: const Row(
+                                      child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -95,8 +96,8 @@ class RankingPage extends StatelessWidget {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                '500pts',
-                                                style: TextStyle(
+                                                '${truncateDouble((controller.teams[0].total))}',
+                                                style: const TextStyle(
                                                   color: Colors.black,
                                                   fontFamily: 'Lato',
                                                   fontSize: 24.0,
@@ -104,8 +105,8 @@ class RankingPage extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                'Equipe 4',
-                                                style: TextStyle(
+                                                controller.teams[0].name,
+                                                style: const TextStyle(
                                                   color: Colors.black,
                                                   fontFamily: 'Lato',
                                                   fontSize: 16.0,
@@ -120,6 +121,7 @@ class RankingPage extends StatelessWidget {
                                     Positioned(
                                       bottom: -16.0,
                                       left: size.width * 0.125,
+                                      right: size.width * 0.125,
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 24.0,
@@ -138,6 +140,8 @@ class RankingPage extends StatelessWidget {
                                               BorderRadius.circular(36.0),
                                         ),
                                         child: const Row(
+                                          mainAxisAlignment:
+                                              MainAxisAlignment.center,
                                           mainAxisSize: MainAxisSize.min,
                                           children: [
                                             Text(
@@ -189,7 +193,7 @@ class RankingPage extends StatelessWidget {
                                         borderRadius:
                                             BorderRadius.circular(36.0),
                                       ),
-                                      child: const Row(
+                                      child: Row(
                                         mainAxisAlignment:
                                             MainAxisAlignment.center,
                                         children: [
@@ -198,8 +202,8 @@ class RankingPage extends StatelessWidget {
                                                 MainAxisAlignment.center,
                                             children: [
                                               Text(
-                                                '500pts',
-                                                style: TextStyle(
+                                                '${truncateDouble((controller.teams[1].total))}',
+                                                style: const TextStyle(
                                                   color: Colors.black,
                                                   fontFamily: 'Lato',
                                                   fontSize: 24.0,
@@ -207,8 +211,8 @@ class RankingPage extends StatelessWidget {
                                                 ),
                                               ),
                                               Text(
-                                                'Equipe 4',
-                                                style: TextStyle(
+                                                controller.teams[1].name,
+                                                style: const TextStyle(
                                                   color: Colors.black,
                                                   fontFamily: 'Lato',
                                                   fontSize: 16.0,
@@ -223,6 +227,7 @@ class RankingPage extends StatelessWidget {
                                     Positioned(
                                       bottom: -16.0,
                                       left: size.width * 0.125,
+                                      right: size.width * 0.125,
                                       child: Container(
                                         padding: const EdgeInsets.symmetric(
                                           horizontal: 24.0,
@@ -297,7 +302,7 @@ class RankingPage extends StatelessWidget {
                                       ),
                                       const SizedBox(width: 24.0),
                                       Text(
-                                        controller.teams[listIndex].name,
+                                        '${truncateDouble((controller.teams[listIndex].total))}',
                                         style: const TextStyle(
                                           color: Color(0xFF3B3D3C),
                                           fontFamily: 'Lato',
@@ -307,7 +312,7 @@ class RankingPage extends StatelessWidget {
                                       ),
                                       const Spacer(),
                                       Text(
-                                        '${controller.teams[listIndex].total}pts',
+                                        controller.teams[listIndex].name,
                                         style: const TextStyle(
                                           color: Colors.black,
                                           fontFamily: 'Lato',

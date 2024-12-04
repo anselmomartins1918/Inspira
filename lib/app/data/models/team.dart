@@ -1,6 +1,6 @@
 class Team {
   final String name;
-  final int total;
+  final double total;
 
   Team({required this.name, required this.total});
 
