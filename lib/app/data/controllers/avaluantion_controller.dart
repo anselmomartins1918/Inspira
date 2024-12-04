@@ -8,8 +8,10 @@ class AvaluantionController {
   ValueNotifier<int> actualValue$ = ValueNotifier<int>(0);
   int get actualValue => actualValue$.value;
 
-  ValueNotifier<List<int>> grades$ = ValueNotifier<List<int>>([0, 0, 0, 0]);
-  List<int> get grades => grades$.value;
+  ValueNotifier<List<int?>> grades$ = ValueNotifier<List<int?>>(
+    [null, null, null, null, null, null, null, null],
+  );
+  List<int?> get grades => grades$.value;
 
   void changeAvaluation(int value) => avaluation$.value = value;
 
@@ -45,13 +47,16 @@ class AvaluantionController {
 
       DocumentSnapshot doc = await docRef.get();
 
+      double result = (grades.whereType<int>().fold(0, (a, b) => a + b)) / 10;
+      double truncatedValue = (result * 100).truncateToDouble() / 100;
+
       if (doc.exists) {
         docRef.update({
-          team: grades[0] * 3 + grades[1] * 3 + grades[2] * 2 + grades[3] * 1,
+          team: truncatedValue,
         });
       } else {
         docRef.set({
-          team: grades[0] * 3 + grades[1] * 3 + grades[2] * 2 + grades[3] * 1,
+          team: truncatedValue,
         });
       }
 
