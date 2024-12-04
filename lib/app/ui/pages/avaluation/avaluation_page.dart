@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:inspira/app/data/controllers/avaluantion_controller.dart';
@@ -272,9 +270,9 @@ class _AvaluationPageState extends State<AvaluationPage> {
                           ],
                         ),
                       if (controller.actualValue == 8)
-                        const Column(
+                        Column(
                           children: [
-                            Row(
+                            const Row(
                               children: [
                                 Text(
                                   'Critério',
@@ -296,6 +294,48 @@ class _AvaluationPageState extends State<AvaluationPage> {
                                   ),
                                 ),
                               ],
+                            ),
+                            SizedBox(
+                              height: size.height * 0.45,
+                              child: ListView.separated(
+                                itemCount: AvaluationPage.types.length + 1,
+                                itemBuilder: (context, index) {
+                                  return Container(
+                                    color: index < 8
+                                        ? Colors.white
+                                        : const Color(0xFFFEEED1),
+                                    padding: const EdgeInsets.all(8.0),
+                                    child: Row(
+                                      children: [
+                                        Text(
+                                          index < 8
+                                              ? '${index + 1}. ${AvaluationPage.types[index]}'
+                                              : 'Pontuação Total',
+                                          style: const TextStyle(
+                                            color: Color(0xFF032826),
+                                            fontFamily: 'lato',
+                                            fontSize: 16.0,
+                                            fontWeight: FontWeight.w400,
+                                          ),
+                                        ),
+                                        const Spacer(),
+                                        Text(
+                                          index < 8
+                                              ? '${controller.grades[index] ?? 0}/10pts'
+                                              : '${controller.grades.whereType<int>().fold(0, (a, b) => a + b)}/80pts',
+                                        ),
+                                      ],
+                                    ),
+                                  );
+                                },
+                                separatorBuilder: (context, index) {
+                                  return Container(
+                                    color: const Color(0xFFB0B8B3),
+                                    height: 1.0,
+                                    width: size.width,
+                                  );
+                                },
+                              ),
                             ),
                           ],
                         ),
@@ -356,7 +396,7 @@ class _AvaluationPageState extends State<AvaluationPage> {
                                   Text(
                                     controller.actualValue != 8
                                         ? 'Próximo Critério'
-                                        : 'Avaliar Equipe em 50pts',
+                                        : 'Avaliar Equipe em ${controller.grades.whereType<int>().fold(0, (a, b) => a + b)}pts',
                                     style: const TextStyle(
                                       color: Color(0xFFF0F5F2),
                                       fontFamily: 'Lato',
@@ -424,7 +464,7 @@ class _AvaluationPageState extends State<AvaluationPage> {
                               onTap: () {
                                 controller.navigateTo(index: index);
 
-                                if (index < 8) {
+                                if (controller.actualValue < 8) {
                                   if (controller
                                           .grades[controller.actualValue] !=
                                       null) {
