@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:inspira/app/data/controllers/avaluantion_controller.dart';
@@ -173,90 +175,130 @@ class _AvaluationPageState extends State<AvaluationPage> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.center,
                     children: [
-                      IntrinsicHeight(
-                        child: SizedBox(
-                          width: size.width,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text(
-                                'Critério ${controller.actualValue + 1}/8',
-                                style: const TextStyle(
-                                  color: Color(0xFF078438),
-                                  fontFamily: 'Lato',
-                                  fontSize: 20.0,
-                                  fontWeight: FontWeight.w400,
-                                ),
-                              ),
-                              Text(
-                                AvaluationPage.types[controller.actualValue],
-                                textAlign: TextAlign.start,
-                                style: const TextStyle(
-                                  color: Color(0xFF032826),
-                                  fontFamily: 'Lalo',
-                                  fontSize: 28.0,
-                                  fontWeight: FontWeight.bold,
-                                ),
-                              ),
-                            ],
-                          ),
-                        ),
-                      ),
-                      const SizedBox(height: 32.0),
-                      AnimatedBuilder(
-                        animation: controller.avaluation$,
-                        builder: (context, child) {
-                          return CarouselSlider.builder(
-                            carouselController: carouselSliderController,
-                            itemCount: 11,
-                            itemBuilder: (context, index, ind) {
-                              return GestureDetector(
-                                onTap: () {
-                                  controller.changeAvaluation(index);
-                                  carouselSliderController.jumpToPage(index);
-                                },
-                                child: Center(
-                                  child: Container(
-                                    decoration: BoxDecoration(
-                                      color: controller.avaluation == index
-                                          ? const Color(0xFFFEEED1)
-                                          : null,
-                                      border: controller.avaluation == index
-                                          ? Border.all(
-                                              color: const Color(0xFFF6741C))
-                                          : null,
-                                      borderRadius: BorderRadius.circular(12.0),
-                                    ),
-                                    padding: const EdgeInsets.symmetric(
-                                      horizontal: 32.0,
-                                    ),
-                                    child: Text(
-                                      '$index',
+                      if (controller.actualValue != 8)
+                        Column(
+                          children: [
+                            IntrinsicHeight(
+                              child: SizedBox(
+                                width: size.width,
+                                child: Column(
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      'Critério ${controller.actualValue + 1}/8',
                                       style: const TextStyle(
-                                        color: Color(0xFFF6741C),
-                                        fontFamily: 'lato',
-                                        fontSize: 120.0,
-                                        fontWeight: FontWeight.w800,
+                                        color: Color(0xFF078438),
+                                        fontFamily: 'Lato',
+                                        fontSize: 20.0,
+                                        fontWeight: FontWeight.w400,
                                       ),
                                     ),
+                                    Text(
+                                      AvaluationPage
+                                          .types[controller.actualValue],
+                                      textAlign: TextAlign.start,
+                                      style: const TextStyle(
+                                        color: Color(0xFF032826),
+                                        fontFamily: 'Lalo',
+                                        fontSize: 28.0,
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ),
+                            const SizedBox(height: 32.0),
+                            AnimatedBuilder(
+                              animation: controller.avaluation$,
+                              builder: (context, child) {
+                                return CarouselSlider.builder(
+                                  carouselController: carouselSliderController,
+                                  itemCount: 11,
+                                  itemBuilder: (context, index, ind) {
+                                    return GestureDetector(
+                                      onTap: () {
+                                        controller.changeAvaluation(index);
+                                        carouselSliderController
+                                            .jumpToPage(index);
+                                      },
+                                      child: Center(
+                                        child: Container(
+                                          decoration: BoxDecoration(
+                                            color:
+                                                controller.avaluation == index
+                                                    ? const Color(0xFFFEEED1)
+                                                    : null,
+                                            border: controller.avaluation ==
+                                                    index
+                                                ? Border.all(
+                                                    color:
+                                                        const Color(0xFFF6741C))
+                                                : null,
+                                            borderRadius:
+                                                BorderRadius.circular(12.0),
+                                          ),
+                                          padding: const EdgeInsets.symmetric(
+                                            horizontal: 32.0,
+                                          ),
+                                          child: Text(
+                                            '$index',
+                                            style: const TextStyle(
+                                              color: Color(0xFFF6741C),
+                                              fontFamily: 'lato',
+                                              fontSize: 120.0,
+                                              fontWeight: FontWeight.w800,
+                                            ),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                                  },
+                                  options: CarouselOptions(
+                                    enableInfiniteScroll: false,
+                                    aspectRatio: 2.0,
+                                    enlargeCenterPage: true,
+                                    enlargeStrategy:
+                                        CenterPageEnlargeStrategy.height,
+                                    viewportFraction: 0.45,
+                                    pageSnapping: false,
+                                    onPageChanged: (index, reason) =>
+                                        controller.changeAvaluation(index),
+                                  ),
+                                );
+                              },
+                            ),
+                            const SizedBox(height: 48.0),
+                          ],
+                        ),
+                      if (controller.actualValue == 8)
+                        const Column(
+                          children: [
+                            Row(
+                              children: [
+                                Text(
+                                  'Critério',
+                                  style: TextStyle(
+                                    color: Color(0xFF032826),
+                                    fontFamily: 'lato',
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
                                   ),
                                 ),
-                              );
-                            },
-                            options: CarouselOptions(
-                              enableInfiniteScroll: false,
-                              aspectRatio: 2.0,
-                              enlargeCenterPage: true,
-                              enlargeStrategy: CenterPageEnlargeStrategy.height,
-                              viewportFraction: 0.45,
-                              pageSnapping: false,
-                              onPageChanged: (index, reason) =>
-                                  controller.changeAvaluation(index),
+                                Spacer(),
+                                Text(
+                                  'Pontuação',
+                                  style: TextStyle(
+                                    color: Color(0xFF032826),
+                                    fontFamily: 'lato',
+                                    fontSize: 16.0,
+                                    fontWeight: FontWeight.w700,
+                                  ),
+                                ),
+                              ],
                             ),
-                          );
-                        },
-                      ),
-                      const SizedBox(height: 48.0),
+                          ],
+                        ),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -334,10 +376,16 @@ class _AvaluationPageState extends State<AvaluationPage> {
                                 controller.setValue();
                                 controller.increment();
 
-                                if (controller.grades[controller.actualValue] !=
-                                    null) {
-                                  carouselSliderController.jumpToPage(controller
-                                      .grades[controller.actualValue]!);
+                                if (controller.actualValue < 8) {
+                                  if (controller
+                                          .grades[controller.actualValue] !=
+                                      null) {
+                                    carouselSliderController.jumpToPage(
+                                        controller
+                                            .grades[controller.actualValue]!);
+                                  } else {
+                                    carouselSliderController.jumpToPage(0);
+                                  }
                                 }
                               },
                             ),
@@ -369,48 +417,78 @@ class _AvaluationPageState extends State<AvaluationPage> {
                           scrollDirection: Axis.horizontal,
                           itemCount: AvaluationPage.types.length + 1,
                           itemBuilder: (context, index) {
+                            bool isSelect =
+                                index < 8 && controller.grades[index] != null;
+
                             return GestureDetector(
                               onTap: () {
-                                controller.setValue();
                                 controller.navigateTo(index: index);
 
-                                if (controller.grades[controller.actualValue] !=
-                                    null) {
-                                  carouselSliderController.jumpToPage(controller
-                                      .grades[controller.actualValue]!);
+                                if (index < 8) {
+                                  if (controller
+                                          .grades[controller.actualValue] !=
+                                      null) {
+                                    carouselSliderController.jumpToPage(
+                                        controller
+                                            .grades[controller.actualValue]!);
+                                  } else {
+                                    carouselSliderController.jumpToPage(0);
+                                  }
                                 }
                               },
                               child: Container(
                                 height: 40.0,
                                 decoration: BoxDecoration(
-                                  color: index == controller.actualValue
-                                      ? const Color(0xFFFEEED1)
-                                      : Colors.white,
-                                  border: Border.all(
-                                    color: index == controller.actualValue
-                                        ? const Color(0xFFF6741C)
-                                        : const Color(0xFF141414),
-                                  ),
+                                  color: isSelect
+                                      ? const Color(0xFFC9F8C9)
+                                      : index == controller.actualValue
+                                          ? const Color(0xFFFEEED1)
+                                          : Colors.white,
+                                  border: !isSelect
+                                      ? Border.all(
+                                          color: index == controller.actualValue
+                                              ? const Color(0xFFF6741C)
+                                              : const Color(0xFF141414),
+                                        )
+                                      : null,
                                   borderRadius: BorderRadius.circular(36.0),
                                 ),
                                 margin: EdgeInsets.only(
-                                    left: index != 0 ? 8.0 : 0.0, bottom: 2.0),
-                                padding: const EdgeInsets.symmetric(
-                                    horizontal: 32.0),
+                                  left: index != 0 ? 8.0 : 0.0,
+                                  bottom: 2.0,
+                                ),
+                                padding: EdgeInsets.symmetric(
+                                  horizontal: (index < 8 &&
+                                          controller.grades[index] != null)
+                                      ? 20.0
+                                      : 32.0,
+                                ),
                                 child: Row(
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   children: [
                                     Text(
-                                      index != 8
+                                      index < 8
                                           ? (index + 1).toString()
                                           : 'Confirmação',
                                       style: TextStyle(
-                                        color: index == controller.actualValue
-                                            ? const Color(0xFFF6741C)
-                                            : const Color(0xFF141414),
+                                        color: isSelect
+                                            ? const Color(0xFF035F39)
+                                            : index == controller.actualValue
+                                                ? const Color(0xFFF6741C)
+                                                : const Color(0xFF141414),
                                       ),
                                     ),
+                                    if (isSelect)
+                                      Container(
+                                        margin:
+                                            const EdgeInsets.only(left: 4.0),
+                                        child: const Icon(
+                                          Icons.check,
+                                          color: Color(0xFF035F39),
+                                          size: 24.0,
+                                        ),
+                                      ),
                                   ],
                                 ),
                               ),
