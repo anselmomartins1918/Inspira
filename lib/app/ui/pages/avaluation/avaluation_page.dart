@@ -2,11 +2,11 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:inspira/app/data/controllers/avaluantion_controller.dart';
 
-class AvaluationPage extends StatelessWidget {
+class AvaluationPage extends StatefulWidget {
   final String name;
   final String team;
 
-  AvaluationPage({
+  const AvaluationPage({
     required this.name,
     required this.team,
     super.key,
@@ -23,6 +23,11 @@ class AvaluationPage extends StatelessWidget {
     'Qualidade da Apresentação (clareza, emoção, design)',
   ];
 
+  @override
+  State<AvaluationPage> createState() => _AvaluationPageState();
+}
+
+class _AvaluationPageState extends State<AvaluationPage> {
   final CarouselSliderController carouselSliderController =
       CarouselSliderController();
 
@@ -105,7 +110,7 @@ class AvaluationPage extends StatelessWidget {
                             horizontal: 24.0,
                           ),
                           child: Text(
-                            team,
+                            widget.team,
                             style: const TextStyle(
                               color: Color(0xFFF6741C),
                               fontFamily: 'Lato',
@@ -129,27 +134,36 @@ class AvaluationPage extends StatelessWidget {
                           ),
                         ),
                         const SizedBox(height: 8.0),
-                        Container(
-                          decoration: BoxDecoration(
-                            border: Border.all(
-                              color: const Color(0xFFF6741C),
-                              width: 1.0,
-                            ),
-                            borderRadius: BorderRadius.circular(12.0),
-                          ),
-                          padding: const EdgeInsets.symmetric(
-                            vertical: 8.0,
-                            horizontal: 24.0,
-                          ),
-                          child: const Text(
-                            '0/80pts',
-                            style: TextStyle(
-                              color: Color(0xFFF6741C),
-                              fontFamily: 'Lato',
-                              fontSize: 20.0,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ),
+                        AnimatedBuilder(
+                          animation: controller.grades$,
+                          builder: (context, child) {
+                            int sum = controller.grades
+                                .whereType<int>()
+                                .fold(0, (a, b) => a + b);
+
+                            return Container(
+                              decoration: BoxDecoration(
+                                border: Border.all(
+                                  color: const Color(0xFFF6741C),
+                                  width: 1.0,
+                                ),
+                                borderRadius: BorderRadius.circular(12.0),
+                              ),
+                              padding: const EdgeInsets.symmetric(
+                                vertical: 8.0,
+                                horizontal: 24.0,
+                              ),
+                              child: Text(
+                                '$sum/80pts',
+                                style: const TextStyle(
+                                  color: Color(0xFFF6741C),
+                                  fontFamily: 'Lato',
+                                  fontSize: 20.0,
+                                  fontWeight: FontWeight.w700,
+                                ),
+                              ),
+                            );
+                          },
                         ),
                       ],
                     ),
@@ -175,7 +189,7 @@ class AvaluationPage extends StatelessWidget {
                                 ),
                               ),
                               Text(
-                                types[controller.actualValue],
+                                AvaluationPage.types[controller.actualValue],
                                 textAlign: TextAlign.start,
                                 style: const TextStyle(
                                   color: Color(0xFF032826),
@@ -269,6 +283,13 @@ class AvaluationPage extends StatelessWidget {
                                   Navigator.pop(context);
                                 } else {
                                   controller.decrement();
+                                  if (controller
+                                          .grades[controller.actualValue] !=
+                                      null) {
+                                    carouselSliderController.jumpToPage(
+                                        controller
+                                            .grades[controller.actualValue]!);
+                                  }
                                 }
                               },
                             ),
@@ -309,7 +330,16 @@ class AvaluationPage extends StatelessWidget {
                                   ),
                                 ],
                               ),
-                              onPressed: () => controller.increment(),
+                              onPressed: () {
+                                controller.setValue();
+                                controller.increment();
+
+                                if (controller.grades[controller.actualValue] !=
+                                    null) {
+                                  carouselSliderController.jumpToPage(controller
+                                      .grades[controller.actualValue]!);
+                                }
+                              },
                             ),
                           ),
                         ],
@@ -337,10 +367,19 @@ class AvaluationPage extends StatelessWidget {
                         height: 40.0,
                         child: ListView.builder(
                           scrollDirection: Axis.horizontal,
-                          itemCount: types.length + 1,
+                          itemCount: AvaluationPage.types.length + 1,
                           itemBuilder: (context, index) {
                             return GestureDetector(
-                              onTap: () => controller.navigateTo(index: index),
+                              onTap: () {
+                                controller.setValue();
+                                controller.navigateTo(index: index);
+
+                                if (controller.grades[controller.actualValue] !=
+                                    null) {
+                                  carouselSliderController.jumpToPage(controller
+                                      .grades[controller.actualValue]!);
+                                }
+                              },
                               child: Container(
                                 height: 40.0,
                                 decoration: BoxDecoration(
