@@ -10,14 +10,12 @@ class TeamSelection extends StatelessWidget {
   });
 
   final List<String> teams = [
-    'Equipe 1',
-    'Equipe 2',
-    'Equipe 3',
-    'Equipe 4',
-    'Equipe 5',
-    'Equipe 6',
-    'Equipe 7',
-    'Equipe 8'
+    'Futuro Seguro',
+    'Mind Conect',
+    'Sua Cidade. Sua Voz',
+    'Sync and Play',
+    'Lanche na Hora',
+    'Nexus',
   ];
 
   @override
