@@ -381,11 +381,18 @@ class _AvaluationPageState extends State<AvaluationPage> {
                             width: size.width * 0.6,
                             child: TextButton(
                               style: TextButton.styleFrom(
-                                backgroundColor: const Color(0xFFF6741C),
-                                side: const BorderSide(
-                                  color: Color(0xFFF6741C),
-                                  width: 2.0,
-                                ),
+                                backgroundColor:
+                                    (!(controller.actualValue < 8) &&
+                                            !controller.verifyComplete())
+                                        ? Colors.grey
+                                        : const Color(0xFFF6741C),
+                                side: (!(controller.actualValue < 8) &&
+                                        !controller.verifyComplete())
+                                    ? null
+                                    : const BorderSide(
+                                        color: Color(0xFFF6741C),
+                                        width: 2.0,
+                                      ),
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(12.0),
                                 ),
@@ -413,10 +420,10 @@ class _AvaluationPageState extends State<AvaluationPage> {
                                 ],
                               ),
                               onPressed: () {
-                                controller.setValue();
-                                controller.increment();
-
                                 if (controller.actualValue < 8) {
+                                  controller.setValue();
+                                  controller.increment();
+
                                   if (controller
                                           .grades[controller.actualValue] !=
                                       null) {
@@ -426,6 +433,8 @@ class _AvaluationPageState extends State<AvaluationPage> {
                                   } else {
                                     carouselSliderController.jumpToPage(0);
                                   }
+                                } else {
+                                  if (controller.verifyComplete()) {}
                                 }
                               },
                             ),

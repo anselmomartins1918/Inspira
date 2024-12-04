@@ -23,12 +23,7 @@ class AvaluantionController {
 
   void navigateTo({required int index}) => actualValue$.value = index;
 
-  bool verifyComplete() {
-    return (grades[0] != 0 &&
-        grades[1] != 0 &&
-        grades[2] != 0 &&
-        grades[3] != 0);
-  }
+  bool verifyComplete() => grades.every((item) => item != null);
 
   void setValue() {
     grades$.value[actualValue] = avaluation;
@@ -51,7 +46,7 @@ class AvaluantionController {
 
       DocumentSnapshot doc = await docRef.get();
 
-      double result = (grades.whereType<int>().fold(0, (a, b) => a + b)) / 10;
+      double result = (grades.whereType<int>().fold(0, (a, b) => a + b)) / 8;
       double truncatedValue = (result * 100).truncateToDouble() / 100;
 
       if (doc.exists) {
