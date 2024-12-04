@@ -61,9 +61,8 @@ class RankingPage extends StatelessWidget {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.spaceBetween,
                           children: [
-                            Visibility(
-                              visible: controller.teams.isNotEmpty,
-                              child: Container(
+                            if (controller.teams.isNotEmpty)
+                              Container(
                                 height: 120.0,
                                 width: size.width * 0.4,
                                 padding: const EdgeInsets.all(3.0),
@@ -166,10 +165,8 @@ class RankingPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            ),
-                            Visibility(
-                              visible: controller.teams.length > 1,
-                              child: Container(
+                            if (controller.teams.length > 1)
+                              Container(
                                 height: 120.0,
                                 width: size.width * 0.4,
                                 padding: const EdgeInsets.all(3.0),
@@ -270,7 +267,6 @@ class RankingPage extends StatelessWidget {
                                   ],
                                 ),
                               ),
-                            ),
                           ],
                         ),
                         const SizedBox(height: 36.0),
