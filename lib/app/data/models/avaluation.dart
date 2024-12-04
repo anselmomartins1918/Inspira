@@ -1,6 +1,6 @@
 class Avaluation {
   final String team;
-  final int grade;
+  final double grade;
 
   Avaluation({required this.team, required this.grade});
 

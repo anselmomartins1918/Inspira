@@ -16,7 +16,7 @@ class HomeController {
   void setName() {
     String? email = auth.user?.email;
 
-    String aux = email?.split('.')[0] ?? 'Avaliador';
+    String aux = email?.split('@')[0] ?? 'Avaliador';
 
     name$.value = aux[0].toUpperCase() + aux.substring(1);
   }

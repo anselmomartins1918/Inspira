@@ -55,8 +55,7 @@ class TeamSelection extends StatelessWidget {
         child: GridView.builder(
           shrinkWrap: true,
           physics: const NeverScrollableScrollPhysics(),
-          gridDelegate:
-              const SliverGridDelegateWithFixedCrossAxisCount(
+          gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
             crossAxisCount: 2,
             mainAxisExtent: 144.0,
             crossAxisSpacing: 32.0,
@@ -67,9 +66,9 @@ class TeamSelection extends StatelessWidget {
             return AnimatedBuilder(
               animation: controller.avaluations$,
               builder: (context, child) {
-                bool isSelect = controller.avaluations.any(
-                    (avaluation) => avaluation.team == teams[index]);
-        
+                bool isSelect = controller.avaluations
+                    .any((avaluation) => avaluation.team == teams[index]);
+
                 return GestureDetector(
                   onTap: () => !isSelect
                       ? Navigator.pushNamed(
@@ -78,11 +77,17 @@ class TeamSelection extends StatelessWidget {
                           arguments: [name, teams[index]],
                         )
                       : null,
-                  child: Card(
-                    color: isSelect
-                        ? const Color(0xFFA6F7A7)
-                        : const Color(0xFFD7E0DB),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: const Color(0xFF141414),
+                        width: 1.0,
+                      ),
+                      borderRadius: BorderRadius.circular(16.0),
+                      color: isSelect ? const Color(0xFFA6F7A7) : Colors.white,
+                    ),
                     child: Stack(
+                      clipBehavior: Clip.none,
                       children: [
                         Center(
                           child: Text(
@@ -95,28 +100,31 @@ class TeamSelection extends StatelessWidget {
                           ),
                         ),
                         if (isSelect)
-                          Align(
-                            alignment: Alignment.bottomCenter,
-                            child: IntrinsicWidth(
-                              child: Container(
-                                decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(100.0),
-                                  color: const Color(0xFF0A6844),
-                                ),
-                                margin: const EdgeInsets.only(
-                                    bottom: 16.0),
-                                padding: const EdgeInsets.symmetric(
-                                  horizontal: 32.0,
-                                  vertical: 8.0,
-                                ),
-                                child: Text(
-                                  "${controller.avaluations.firstWhere((avaluation) => avaluation.team == teams[index]).grade} pts",
-                                  style: const TextStyle(
-                                    color: Color(0xFFA6F7A7),
-                                    fontFamily: 'Lalo',
-                                    fontSize: 16.0,
-                                    fontWeight: FontWeight.bold,
+                          Positioned(
+                            bottom: -24.0,
+                            left: 0.0,
+                            right: 0.0,
+                            child: Align(
+                              alignment: Alignment.bottomCenter,
+                              child: IntrinsicWidth(
+                                child: Container(
+                                  decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(100.0),
+                                    color: const Color(0xFF0A6844),
+                                  ),
+                                  margin: const EdgeInsets.only(bottom: 8.0),
+                                  padding: const EdgeInsets.symmetric(
+                                    horizontal: 32.0,
+                                    vertical: 8.0,
+                                  ),
+                                  child: Text(
+                                    "${controller.avaluations.firstWhere((avaluation) => avaluation.team == teams[index]).grade}",
+                                    style: const TextStyle(
+                                      color: Color(0xFFA6F7A7),
+                                      fontFamily: 'Lalo',
+                                      fontSize: 16.0,
+                                      fontWeight: FontWeight.bold,
+                                    ),
                                   ),
                                 ),
                               ),

@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
@@ -28,8 +26,6 @@ class AvaluantionController {
   void setValue() {
     grades$.value[actualValue] = avaluation;
     grades$.value = List.from(grades$.value);
-
-    log(grades.toString());
   }
 
   bool verifyMarked({required int value}) {

@@ -419,22 +419,56 @@ class _AvaluationPageState extends State<AvaluationPage> {
                                   ),
                                 ],
                               ),
-                              onPressed: () {
+                              onPressed: () async {
                                 if (controller.actualValue < 8) {
                                   controller.setValue();
                                   controller.increment();
 
-                                  if (controller
-                                          .grades[controller.actualValue] !=
-                                      null) {
-                                    carouselSliderController.jumpToPage(
-                                        controller
-                                            .grades[controller.actualValue]!);
-                                  } else {
-                                    carouselSliderController.jumpToPage(0);
+                                  if (controller.actualValue < 8) {
+                                    if (controller
+                                            .grades[controller.actualValue] !=
+                                        null) {
+                                      carouselSliderController.jumpToPage(
+                                          controller
+                                              .grades[controller.actualValue]!);
+                                    } else {
+                                      carouselSliderController.jumpToPage(0);
+                                    }
                                   }
                                 } else {
-                                  if (controller.verifyComplete()) {}
+                                  if (controller.verifyComplete()) {
+                                    bool confirmed =
+                                        await controller.sendAvaluation(
+                                      team: widget.team,
+                                      valuer: widget.name,
+                                    );
+
+                                    if (context.mounted) {
+                                      if (confirmed) {
+                                        Navigator.pushNamed(
+                                          context,
+                                          '/confirmation',
+                                        );
+                                      } else {
+                                        ScaffoldMessenger.of(context)
+                                            .showSnackBar(
+                                          const SnackBar(
+                                            content: Text(
+                                              'Não foi possível concluir a avaliação. Por favor, entre em contato com o suporte!',
+                                            ),
+                                          ),
+                                        );
+                                      }
+                                    }
+                                  } else {
+                                    ScaffoldMessenger.of(context).showSnackBar(
+                                      const SnackBar(
+                                        content: Text(
+                                          'Preencha a avaliação por completo!',
+                                        ),
+                                      ),
+                                    );
+                                  }
                                 }
                               },
                             ),
