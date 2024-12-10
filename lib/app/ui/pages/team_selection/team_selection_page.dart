@@ -10,12 +10,12 @@ class TeamSelection extends StatelessWidget {
   });
 
   final List<String> teams = [
-    'Futuro Seguro',
-    'Mind Conect',
-    'Sua Cidade. Sua Voz',
-    'Sync and Play',
-    'Lanche na Hora',
-    'Nexus',
+    'Viva Sereno',
+    'Alladin',
+    'Darueira',
+    'Bençavó',
+    'FinFocus',
+    'Jovem Tech',
   ];
 
   @override
